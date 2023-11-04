@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:background = "#86afcf"
+    tools:context = ".GameActivity"
+	>
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline2"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "horizontal"
+	    app:layout_constraintGuide_begin = "50dp"
+	    />
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline3"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "horizontal"
+	    app:layout_constraintGuide_begin = "150dp"
+	    />
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline4"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "horizontal"
+	    app:layout_constraintGuide_begin = "450dp"
+	    />
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline5"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "horizontal"
+	    app:layout_constraintGuide_begin = "300dp"
+	    />
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline6"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "horizontal"
+	    app:layout_constraintGuide_begin = "600dp"
+	    />
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline7"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "vertical"
+	    app:layout_constraintGuide_begin = "135dp"
+	    />
+
+    <androidx.constraintlayout.widget.Guideline
+	    android:id = "@+id/guideline8"
+	    android:layout_width = "wrap_content"
+	    android:layout_height = "wrap_content"
+	    android:orientation = "vertical"
+	    app:layout_constraintGuide_begin = "275dp"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole0"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole0"
+	    app:layout_constraintStart_toStartOf = "@+id/hole0"
+	    app:layout_constraintTop_toTopOf = "@+id/hole0"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole1"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole1"
+	    app:layout_constraintStart_toStartOf = "@+id/hole1"
+	    app:layout_constraintTop_toTopOf = "@+id/hole1"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole2"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole2"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
+	    app:layout_constraintTop_toTopOf = "@+id/hole2"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole3"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole3"
+	    app:layout_constraintStart_toStartOf = "@+id/hole3"
+	    app:layout_constraintTop_toTopOf = "@+id/hole3"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole4"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole4"
+	    app:layout_constraintStart_toStartOf = "@+id/hole4"
+	    app:layout_constraintTop_toTopOf = "@+id/hole4"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole5"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole5"
+	    app:layout_constraintStart_toStartOf = "@+id/hole5"
+	    app:layout_constraintTop_toTopOf = "@+id/hole5"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole6"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:layout_marginTop = "15dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole6"
+	    app:layout_constraintHorizontal_bias = "0.507"
+	    app:layout_constraintStart_toStartOf = "@+id/hole6"
+	    app:layout_constraintTop_toTopOf = "@+id/hole6"
+	    app:layout_constraintVertical_bias = "0.34"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole7"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole7"
+	    app:layout_constraintStart_toStartOf = "@+id/hole7"
+	    app:layout_constraintTop_toTopOf = "@+id/hole7"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/mole8"
+	    android:layout_width = "50dp"
+	    android:layout_height = "50dp"
+	    android:onClick = "onMoleClick"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toEndOf = "@+id/hole8"
+	    app:layout_constraintStart_toStartOf = "@+id/hole8"
+	    app:layout_constraintTop_toTopOf = "@+id/hole8"
+	    app:srcCompat = "@drawable/mole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole0"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	    app:layout_constraintStart_toStartOf = "parent"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline3"
+	    app:layout_constraintVertical_bias = "1.0"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole1"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline3"
+	    app:layout_constraintVertical_bias = "1.0"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole2"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintEnd_toEndOf = "parent"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline3"
+	    app:layout_constraintVertical_bias = "1.0"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole3"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "parent"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline5"
+	    app:layout_constraintVertical_bias = "1.0"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole4"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline5"
+	    app:layout_constraintVertical_bias = "1"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole5"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
+	    app:layout_constraintEnd_toEndOf = "parent"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline5"
+	    app:layout_constraintVertical_bias = "1"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole6"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "parent"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	    app:layout_constraintVertical_bias = "1"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole7"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	    app:layout_constraintVertical_bias = "1"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+    <ImageView
+	    android:id = "@+id/hole8"
+	    android:layout_width = "115dp"
+	    android:layout_height = "115dp"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toEndOf = "parent"
+	    app:layout_constraintHorizontal_bias = "0.573"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	    app:layout_constraintVertical_bias = "0.946"
+	    app:srcCompat = "@drawable/hole"
+	    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

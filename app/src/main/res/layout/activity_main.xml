@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                xmlns:app = "http://schemas.android.com/apk/res-auto"
+                xmlns:tools = "http://schemas.android.com/tools"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                tools:context = ".MainActivity"
+	>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+	        android:layout_width = "200dp"
+	        android:layout_height = "match_parent"
+	        android:layout_centerInParent = "true"
+	        >
+	<View
+		android:id = "@+id/popupMenuAnchor"
+		android:layout_width = "200dp"
+		android:layout_height = "50dp"
+		android:layout_centerInParent = "true"
+		android:clickable = "true"
+		android:focusable = "true"
+		app:layout_constraintBottom_toBottomOf = "parent"
+		app:layout_constraintEnd_toEndOf = "parent"
+		app:layout_constraintStart_toStartOf = "parent"
+		app:layout_constraintTop_toTopOf = "@+id/playBTN"
+		app:layout_constraintVertical_bias = "0.0"
+		/><Button
+	        android:id = "@+id/playBTN"
+	        android:layout_width = "200dp"
+	        android:layout_height = "100dp"
+	        android:text = "Play Game"
+	        android:textAlignment = "center"
+	        android:textSize = "25dp"
+	        app:layout_constraintBottom_toBottomOf = "parent"
+	        app:layout_constraintEnd_toEndOf = "parent"
+	        app:layout_constraintHorizontal_bias = "0.0"
+	        app:layout_constraintStart_toStartOf = "parent"
+	        app:layout_constraintTop_toTopOf = "parent"
+	        app:layout_constraintVertical_bias = "0.342"
+	        >
+		
+        
+        </Button><Button
+	        android:id = "@+id/uploadBTN"
+	        android:layout_width = "200dp"
+	        android:layout_height = "100dp"
+	        android:text = "Upload Mole"
+	        android:textAlignment = "center"
+	        android:textSize = "25dp"
+	        app:layout_constraintBottom_toBottomOf = "parent"
+	        app:layout_constraintEnd_toEndOf = "parent"
+	        app:layout_constraintHorizontal_bias = "0"
+	        app:layout_constraintStart_toStartOf = "parent"
+	        app:layout_constraintTop_toTopOf = "parent"
+	        app:layout_constraintVertical_bias = "0.50"
+	        >
+
+</Button><Button
+	        android:id = "@+id/extrasBTN"
+	        android:layout_width = "200dp"
+	        android:layout_height = "100dp"
+	        android:text = "Extras"
+	        android:textAlignment = "center"
+	        android:textSize = "25dp"
+	        app:layout_constraintBottom_toBottomOf = "parent"
+	        app:layout_constraintEnd_toEndOf = "parent"
+	        app:layout_constraintHorizontal_bias = "0.0"
+	        app:layout_constraintStart_toStartOf = "parent"
+	        app:layout_constraintTop_toTopOf = "parent"
+	        app:layout_constraintVertical_bias = "0.659"
+	        >
+	        
+        </Button>
+	       
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
