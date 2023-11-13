@@ -1,9 +1,15 @@
-package com.example.whack_it;
+package com.example.whack_it.Game_Engine;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.animation.ObjectAnimator;
+import android.widget.ImageView;
+
+
 import android.os.Handler;
+
+import com.example.whack_it.Mole;
 
 public class GameInstance
 {
@@ -19,9 +25,15 @@ public class GameInstance
     }
 
     private Handler handler = new Handler();
-    private int moleAppearanceInterval = 5000; // 5 seconds (in milliseconds)
+    private int moleAppearanceInterval = 500; // 5 seconds (in milliseconds)
 
     public void start()
+    {
+        randomMoleAnimation();
+
+    }
+
+    public void randomMoleAnimation()
     {
         Random random = new Random();
         this.isRunning = true;
@@ -34,12 +46,17 @@ public class GameInstance
                 if (isRunning)
                 {
                     Random chosenMole = new Random();
-                    regMoles.get(chosenMole.nextInt(9)).moveMoleUp();
+                    int randomNum = chosenMole.nextInt(9);
+                    regMoles.get(randomNum).moveMoleUp();
+                    regMoles.get(randomNum).setVisible();
                     handler.postDelayed(this, moleAppearanceInterval);
                 }
             }
         }, moleAppearanceInterval);
+    }
 
+    /*
+    TODO
         // Schedule a task to stop the game after the specified time
         handler.postDelayed(new Runnable()
         {
@@ -49,13 +66,16 @@ public class GameInstance
                 stopGame();
             }
         }, moleAppearanceInterval + totalSeconds * 1000);
-    }
-
-    public void stopGame()
-    {
+        }
+        public void stopGame()
+        {
         this.isRunning = false;
         handler.removeCallbacksAndMessages(null); // Remove all callbacks and messages from the handler
         // Other cleanup code if needed
-    }
+        }
+    */
+
 }
+
+
 

@@ -1,4 +1,4 @@
-package com.example.whack_it;
+package com.example.whack_it.Game_Engine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,10 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.whack_it.Mole;
+import com.example.whack_it.R;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class GameActivity extends AppCompatActivity
@@ -39,8 +41,17 @@ public class GameActivity extends AppCompatActivity
         moveDown.setDuration(1000);
         moveDown.start();
     }
+    /*
+        Makes 10 good moles
+    */
+    public void createGoodArray()
+    {
 
-    public void initGame(ArrayList<Mole> badMoles, ArrayList<Mole> regMoles, ArrayList<Mole>goodMoles)
+    }
+    /*
+        Makes 10 bad moles
+    */
+    public void createBadArray()
     {
 
     }

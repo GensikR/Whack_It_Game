@@ -3,14 +3,13 @@ package com.example.whack_it;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.Random;
+import com.example.whack_it.Create_Mole.MakeMoleActivity;
+import com.example.whack_it.Game_Engine.GameActivity;
 
 public class MainActivity extends AppCompatActivity
 {

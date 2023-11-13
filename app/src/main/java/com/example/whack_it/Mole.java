@@ -3,12 +3,17 @@ package com.example.whack_it;
 import android.animation.ObjectAnimator;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class Mole
 {
     private String name;
     private boolean isBad;
     private ImageView moleImage;
     private boolean isHidden = true;
+    private boolean isUserMade = false;
+    public static ArrayList<Mole>  goodMoles = new ArrayList<>();
+    public static ArrayList<Mole>  badMoles = new ArrayList<>();
 
     public Mole(String name, boolean isBad, ImageView moleImage)
     {
@@ -70,4 +75,55 @@ public class Mole
             return;
         }
     }
+
+    public void setVisible()
+    {
+        moleImage.setVisibility(moleImage.VISIBLE);
+    }
+
+    public void setInvisible()
+    {
+        moleImage.setVisibility(moleImage.INVISIBLE);
+    }
+
+    public void addGoodMole(Mole goodMole)
+    {
+        this.goodMoles.add(goodMole);
+    }
+
+    public void addbadMole(Mole badMole)
+    {
+        this.badMoles.add(badMole);
+    }
+
+    public void removeGoodMole()
+    {
+        int i;
+        for(i = 0; i < this.goodMoles.size(); i++)
+        {
+            if(!this.goodMoles.get(i).isUserMade)
+            {
+                this.goodMoles.remove(i);
+                return;
+            }
+        }
+        //TODO: error handling when all moles in the list are goodMoles
+    }
+
+    public void removeBadMole()
+    {
+        int i;
+        for(i = 0; i < this.badMoles.size(); i++)
+        {
+            if(!this.badMoles.get(i).isUserMade)
+            {
+                this.badMoles.remove(i);
+                return;
+            }
+        }
+        //TODO: error handling when all moles in the list are goodMoles
+    }
+
+
+
 }
