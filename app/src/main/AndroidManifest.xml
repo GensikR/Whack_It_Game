@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Game_Engine.GameActivity"
+            android:name=".game_engine.Game_Activity"
             android:label="Game Activity"
         >
     </activity>
         <activity
-            android:name=".Create_Mole.MakeMoleActivity"
+            android:name=".create_mole.MakeMoleActivity"
             android:label="Make Mole Activity"
             >
     </activity>

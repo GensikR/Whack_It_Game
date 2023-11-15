@@ -1,129 +1,74 @@
 package com.example.whack_it;
 
-import android.animation.ObjectAnimator;
-import android.widget.ImageView;
+import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class Mole
-{
+public class Mole {
     private String name;
-    private boolean isBad;
-    private ImageView moleImage;
-    private boolean isHidden = true;
-    private boolean isUserMade = false;
-    public static ArrayList<Mole>  goodMoles = new ArrayList<>();
-    public static ArrayList<Mole>  badMoles = new ArrayList<>();
+    private boolean is_bad;
+    private int mole_image_id;
+    private boolean is_hidden = true;
+    private boolean is_user_made = false;
 
-    public Mole(String name, boolean isBad, ImageView moleImage)
-    {
+    // Lists to hold good and bad moles
+    public static ArrayList<Mole> good_moles = new ArrayList<>();
+    public static ArrayList<Mole> bad_moles = new ArrayList<>();
+
+    // Constructor to initialize mole attributes
+    public Mole(String name, boolean is_bad, int mole_image_id) {
         this.name = name;
-        this.isBad = isBad;
-        this.moleImage = moleImage;
+        this.is_bad = is_bad;
+        this.mole_image_id = mole_image_id;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+    // Adds a mole to the appropriate list (good or bad)
+    public static void add_mole_to_list(Mole new_mole, boolean is_bad) {
+        ArrayList<Mole> mole_list = is_bad ? new_mole.bad_moles : new_mole.good_moles;
 
-    public void setBad(boolean bad)
-    {
-        isBad = bad;
-    }
-
-    public void setMoleImage(ImageView moleImage)
-    {
-        this.moleImage = moleImage;
-    }
-
-    public void setHidden(boolean hidden)
-    {
-        isHidden = hidden;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public boolean isBad()
-    {
-        return isBad;
-    }
-
-    public ImageView getMoleImage()
-    {
-        return moleImage;
-    }
-
-    public boolean isHidden()
-    {
-        return isHidden;
-    }
-
-    public void moveMoleUp()
-    {
-        if (this.isHidden)
-        {
-            ObjectAnimator moleAnimation = ObjectAnimator.ofFloat(moleImage, "translationY", -100);
-            moleAnimation.setDuration(1000);
-            moleAnimation.start();
-        }
-        else
-        {
-            return;
+        if (mole_list.size() < 11) {
+            mole_list.add(new_mole);
+        } else {
+            new_mole.remove_mole(is_bad);
+            mole_list.add(new_mole);
         }
     }
 
-    public void setVisible()
-    {
-        moleImage.setVisibility(moleImage.VISIBLE);
+    // Gets the mole image ID
+    public int getMole_image_id() {
+        return this.mole_image_id;
     }
 
-    public void setInvisible()
-    {
-        moleImage.setVisibility(moleImage.INVISIBLE);
-    }
+    // Removes a mole from the list of good moles
+    public void remove_mole(boolean is_bad) {
+        ArrayList<Mole> mole_list = is_bad ? this.bad_moles : this.good_moles;
 
-    public void addGoodMole(Mole goodMole)
-    {
-        this.goodMoles.add(goodMole);
-    }
-
-    public void addbadMole(Mole badMole)
-    {
-        this.badMoles.add(badMole);
-    }
-
-    public void removeGoodMole()
-    {
-        int i;
-        for(i = 0; i < this.goodMoles.size(); i++)
-        {
-            if(!this.goodMoles.get(i).isUserMade)
-            {
-                this.goodMoles.remove(i);
+        for (int i = 0; i < mole_list.size(); i++) {
+            if (!mole_list.get(i).is_user_made) {
+                mole_list.remove(i);
                 return;
             }
         }
-        //TODO: error handling when all moles in the list are goodMoles
+        // TODO: Add error handling when all moles in the list are user-made
     }
 
-    public void removeBadMole()
-    {
-        int i;
-        for(i = 0; i < this.badMoles.size(); i++)
-        {
-            if(!this.badMoles.get(i).isUserMade)
-            {
-                this.badMoles.remove(i);
-                return;
-            }
+    // Creates 10 good moles with random names
+    public static void create_good_moles() {
+        List<String> good_names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace", "Henry", "Ivy", "Jack");
+
+        for (int i = 0; i < good_names.size(); i++) {
+            Mole.add_mole_to_list(new Mole(good_names.get(i), false, R.drawable.mole), false);
         }
-        //TODO: error handling when all moles in the list are goodMoles
     }
 
+    // Creates 10 bad moles with random names
+    public static void create_bad_moles() {
+        List<String> bad_names = Arrays.asList("John", "Kate", "Leo", "Mia", "Noah", "Olivia", "Peter", "Quinn", "Rose", "Sam");
 
-
+        for (int i = 0; i < bad_names.size(); i++) {
+            Mole.add_mole_to_list(new Mole(bad_names.get(i), true, R.drawable.mole), true);
+        }
+    }
 }

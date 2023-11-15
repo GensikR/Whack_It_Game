@@ -6,7 +6,7 @@
     android:layout_width = "match_parent"
     android:layout_height = "match_parent"
     android:background = "#86afcf"
-    tools:context = ".Game_Engine.GameActivity"
+    tools:context = ".game_engine.Game_Activity"
 	>
 
     <androidx.constraintlayout.widget.Guideline
@@ -69,78 +69,72 @@
 	    android:id = "@+id/mole0"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole0"
 	    app:layout_constraintStart_toStartOf = "@+id/hole0"
 	    app:layout_constraintTop_toTopOf = "@+id/hole0"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole1"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole1"
 	    app:layout_constraintStart_toStartOf = "@+id/hole1"
 	    app:layout_constraintTop_toTopOf = "@+id/hole1"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole2"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole2"
 	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
 	    app:layout_constraintTop_toTopOf = "@+id/hole2"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole3"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole3"
 	    app:layout_constraintStart_toStartOf = "@+id/hole3"
 	    app:layout_constraintTop_toTopOf = "@+id/hole3"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole4"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole4"
 	    app:layout_constraintStart_toStartOf = "@+id/hole4"
 	    app:layout_constraintTop_toTopOf = "@+id/hole4"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole5"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole5"
 	    app:layout_constraintStart_toStartOf = "@+id/hole5"
 	    app:layout_constraintTop_toTopOf = "@+id/hole5"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
@@ -148,7 +142,7 @@
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
 	    android:layout_marginTop = "15dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole6"
@@ -156,33 +150,30 @@
 	    app:layout_constraintStart_toStartOf = "@+id/hole6"
 	    app:layout_constraintTop_toTopOf = "@+id/hole6"
 	    app:layout_constraintVertical_bias = "0.34"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole7"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole7"
 	    app:layout_constraintStart_toStartOf = "@+id/hole7"
 	    app:layout_constraintTop_toTopOf = "@+id/hole7"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole8"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
-	    android:onClick = "onMoleClick"
+	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
 	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
 	    app:layout_constraintEnd_toEndOf = "@+id/hole8"
 	    app:layout_constraintStart_toStartOf = "@+id/hole8"
 	    app:layout_constraintTop_toTopOf = "@+id/hole8"
-	    app:srcCompat = "@drawable/mole"
 	    />
 
     <ImageView
