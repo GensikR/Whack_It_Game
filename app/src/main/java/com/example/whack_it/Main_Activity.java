@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.whack_it.create_mole.MakeMoleActivity;
-import com.example.whack_it.game_engine.Game_Activity;
+import com.example.whack_it.game.Game_Activity;
+import com.example.whack_it.mk_mole.MakeMoleActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class Main_Activity extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Create an Intent to start the Game_Activity with the selected difficulty
                 if (difficulty.equals("Easy") || difficulty.equals("Medium") || difficulty.equals("Hard")) {
-                    Intent intent = new Intent(MainActivity.this, Game_Activity.class);
+                    Intent intent = new Intent(Main_Activity.this, Game_Activity.class);
                     intent.putExtra("difficulty", difficulty);
                     startActivity(intent);
                 }
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         // Set click listener for the uploadButton
         uploadButton.setOnClickListener(v -> {
             // Create an Intent to start the MakeMoleActivity
-            Intent intent = new Intent(MainActivity.this, MakeMoleActivity.class);
+            Intent intent = new Intent(Main_Activity.this, MakeMoleActivity.class);
             startActivity(intent);
         });
     }

@@ -1,4 +1,4 @@
-package com.example.whack_it.create_mole;
+package com.example.whack_it.mk_mole;
 
 import android.content.Intent;
 import android.provider.MediaStore;
@@ -38,7 +38,7 @@ public class GetImageMenu extends AppCompatActivity {
         // Set a click listener on the button
         this.button.setOnClickListener(v -> {
             // Create a popup menu for image selection
-            PopupMenu popupMenu = new PopupMenu(this, popupMenuAnchor);
+            PopupMenu popupMenu = new PopupMenu(this, this.popupMenuAnchor);
             popupMenu.getMenu().add("Choose From Gallery");
             popupMenu.getMenu().add("Take Picture");
             popupMenu.getMenu().add("Choose From Stock");

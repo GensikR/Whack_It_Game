@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Whack_It"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".Main_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +25,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".game_engine.Game_Activity"
+            android:name=".game.Game_Activity"
             android:label="Game Activity"
         >
-    </activity>
+        </activity>
         <activity
-            android:name=".create_mole.MakeMoleActivity"
+            android:name=".mk_mole.MakeMoleActivity"
             android:label="Make Mole Activity"
             >
-    </activity>
-    </application>
+        </activity>
+        
+        <activity
+            android:name=".game.Game_Over_Activity"
+            android:label="Game Over Activity">
+        </activity>
+        </application>
 
 </manifest>

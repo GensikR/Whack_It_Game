@@ -1,6 +1,6 @@
-package com.example.whack_it;
+package com.example.whack_it.mk_mole;
 
-import android.graphics.drawable.Drawable;
+import com.example.whack_it.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

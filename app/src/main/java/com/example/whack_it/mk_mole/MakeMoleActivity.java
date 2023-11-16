@@ -1,4 +1,4 @@
-package com.example.whack_it.create_mole;
+package com.example.whack_it.mk_mole;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +9,10 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whack_it.Mole;
 import com.example.whack_it.R;
 
 public class MakeMoleActivity extends AppCompatActivity {
-    ImageView imgGallery;
+    private ImageView imgGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +25,7 @@ public class MakeMoleActivity extends AppCompatActivity {
 
         // Get image from the user using a popup menu
         GetImageMenu imageMenu = new GetImageMenu(chooseAppButton, popupMenuAnchor);
+        imageMenu.start();
         ImageView userImage = imageMenu.get_mole_image();
 
         // Get mole name from editText
