@@ -9,6 +9,9 @@ import com.example.whack_it.mk_mole.Mole;
 
 import java.util.Random;
 
+/**
+ * Represents an instance of the Whack-a-Mole game.
+ */
 public class Game_Instance
 {
     // Game state variables
@@ -17,9 +20,14 @@ public class Game_Instance
     private int total_points;
     private int good_taps;
     private int bad_taps;
-    int game_time;
+    private int game_time;
 
-    // Constructor
+    /**
+     * Constructor for initializing a Game_Instance.
+     *
+     * @param mole_pop_freq The frequency at which moles pop up.
+     * @param game_time     The total duration of the game.
+     */
     public Game_Instance(int mole_pop_freq, int game_time)
     {
         this.is_running = false;
@@ -30,16 +38,24 @@ public class Game_Instance
         this.game_time = game_time;
     }
 
-    // Start the game
+    /**
+     * Start the game.
+     */
     void start_game()
     {
         this.is_running = true;
         this.random_mole_animation();
-        this.schedule_game_stop();
+        //this.schedule_game_stop();
     }
 
-    // Animation handler for random mole appearance
+    /**
+     * Animation handler for random mole appearance.
+     */
     private Handler handler = new Handler();
+
+    /**
+     * Initiates a random mole appearance animation.
+     */
     public void random_mole_animation()
     {
         Random random = new Random();
@@ -48,8 +64,10 @@ public class Game_Instance
         handler.postDelayed(new Runnable()
         {
             @Override
-            public void run() {
-                if (is_running) {
+            public void run()
+            {
+                if (is_running)
+                {
                     // Chooses a mole and animates its appearance
                     ImageView chosen_mole = choose_mole();
                     move_mole_up(chosen_mole);
@@ -59,7 +77,11 @@ public class Game_Instance
         }, mole_pop_freq);
     }
 
-    // Chooses a random mole view and sets its image resource
+    /**
+     * Chooses a random mole view and sets its image resource.
+     *
+     * @return The ImageView of the chosen mole.
+     */
     public ImageView choose_mole()
     {
         Random random = new Random();
@@ -69,7 +91,11 @@ public class Game_Instance
         return Game_Activity.mole_viewsId_list.get(random_idx);
     }
 
-    // Animates the mole to move up
+    /**
+     * Animates the mole to move up.
+     *
+     * @param mole_image The ImageView of the mole to move.
+     */
     public void move_mole_up(ImageView mole_image)
     {
         mole_image.setVisibility(View.VISIBLE);
@@ -78,39 +104,53 @@ public class Game_Instance
         mole_animation.start();
     }
 
-    // Schedule a task to stop the game after the specified time
-    public void schedule_game_stop()
+    /**
+     * Stops the game.
+     */
+    public void stop_game()
     {
-        handler.postDelayed(new Runnable()
-        {
-            @Override
-            public void run() {
-                stop_game();
-            }
-        },
-                game_time * 1000);
-    }
-
-    // Method to stop the game
-    public void stop_game() {
         this.is_running = false;
         handler.removeCallbacksAndMessages(null); // Remove all callbacks and messages from the handler
         // TODO Add any other cleanup
     }
 
     // Methods for points management
-    public void add_points(int points) {
+
+    /**
+     * Adds points to the total score.
+     *
+     * @param points The points to add.
+     */
+    public void add_points(int points)
+    {
         this.total_points += points;
     }
 
-    public void remove_points(int points) {
+    /**
+     * Removes points from the total score.
+     *
+     * @param points The points to remove.
+     */
+    public void remove_points(int points)
+    {
         this.total_points -= points;
     }
 
-    public int get_total_points() {
+    /**
+     * Gets the total points.
+     *
+     * @return The total points.
+     */
+    public int get_total_points()
+    {
         return this.total_points;
     }
 
+    /**
+     * Gets the total game time.
+     *
+     * @return The total game time.
+     */
     public int get_game_time()
     {
         return this.game_time;

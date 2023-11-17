@@ -16,8 +16,14 @@ import com.example.whack_it.R;
 
 import java.util.ArrayList;
 
-public class Game_Activity extends AppCompatActivity {
-    // List to hold the IDs of mole views that will be animated
+/**
+ * Represents the main game activity for Whack-a-Mole.
+ */
+public class Game_Activity extends AppCompatActivity
+{
+    //TODO: Sound buttons to mute/unmute game same for vibration
+    //TODO: Maybe Button to pause game/return to menu
+    //List to hold the IDs of mole views that will be animated
     public static ArrayList<ImageView> mole_viewsId_list = new ArrayList<>();
     private Game_Instance game_instance;
     private CountDownTimer timer;
@@ -39,7 +45,7 @@ public class Game_Activity extends AppCompatActivity {
         Mole.create_bad_moles();
 
         // Starts the game
-        // TODO implement a way to vary game difficulty. start with pop frequency
+        // TODO implement a way to vary game difficulty
         int mole_pop_freq = 500;
         int game_time = 20; // Changed to 20 seconds
         this.game_instance = new Game_Instance(mole_pop_freq, game_time);
@@ -53,21 +59,37 @@ public class Game_Activity extends AppCompatActivity {
         this.total_points_txt = findViewById(R.id.points);
     }
 
-    private void start_timer(int time) {
+    /**
+     * Starts the countdown timer for the game.
+     *
+     * @param time The total time for the countdown timer.
+     */
+    private void start_timer(int time)
+    {
         int total_time = time * 1000;
         start_countdown_timer(total_time);
     }
 
-    private void start_countdown_timer(long totalTimeInMillis) {
-        timer = new CountDownTimer(totalTimeInMillis, 1000) {
+    /**
+     * Initializes and starts the countdown timer.
+     *
+     * @param totalTimeInMillis The total time in milliseconds for the countdown timer.
+     */
+    private void start_countdown_timer(long totalTimeInMillis)
+    {
+        timer = new CountDownTimer(totalTimeInMillis, 1000)
+        {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void onTick(long millisUntilFinished)
+            {
                 update_timer_text(millisUntilFinished);
             }
 
             @Override
-            public void onFinish() {
+            public void onFinish()
+            {
                 // Handle actions when the timer finishes (e.g., end the game)
+                game_instance.stop_game();
                 change_to_game_over_activity();
             }
         };
@@ -76,7 +98,13 @@ public class Game_Activity extends AppCompatActivity {
         timer.start();
     }
 
-    private void update_timer_text(long millisUntilFinished) {
+    /**
+     * Updates the timer text based on the remaining time.
+     *
+     * @param millisUntilFinished The time remaining in milliseconds.
+     */
+    private void update_timer_text(long millisUntilFinished)
+    {
         long minutes = millisUntilFinished / 60000;
         long seconds = (millisUntilFinished % 60000) / 1000;
         String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
@@ -84,18 +112,23 @@ public class Game_Activity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
         // Cancel the countdown timer to prevent memory leaks
-        if (timer != null) {
+        if (timer != null)
+        {
             timer.cancel();
         }
     }
 
     // Populates the mole_viewsId_list with mole views from the layout
-    private void populate_mole_views_list() {
-        for (int i = 0; i < 9; i++) {
-            switch (i) {
+    private void populate_mole_views_list()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            switch (i)
+            {
                 case 0:
                     this.mole_viewsId_list.add(findViewById(R.id.mole0));
                     break;
@@ -129,8 +162,13 @@ public class Game_Activity extends AppCompatActivity {
         }
     }
 
-    // Handles click event on a mole view
-    public void on_mole_click(View view) {
+    /**
+     * Handles the click event on a mole view.
+     *
+     * @param view The clicked mole view.
+     */
+    public void on_mole_click(View view)
+    {
         game_instance.add_points(1);    // TODO: Check if it is a good or bad mole to add or remove points
         this.total_points_txt.setText("" + game_instance.get_total_points());
         ObjectAnimator moveDown = ObjectAnimator.ofFloat(view, "translationY", 5);
@@ -138,6 +176,9 @@ public class Game_Activity extends AppCompatActivity {
         moveDown.start();
     }
 
+    /**
+     * Changes to the Game Over activity.
+     */
     public void change_to_game_over_activity()
     {
         Intent intent = new Intent(Game_Activity.this, Game_Over_Activity.class);

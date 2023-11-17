@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "Whack_It"
 include(":app")
