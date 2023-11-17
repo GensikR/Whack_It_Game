@@ -20,6 +20,7 @@ public class Mole {
     public static ArrayList<Mole> good_moles = new ArrayList<>();
     public static ArrayList<Mole> bad_moles = new ArrayList<>();
 
+
     /**
      * Constructor to initialize mole attributes.
      *

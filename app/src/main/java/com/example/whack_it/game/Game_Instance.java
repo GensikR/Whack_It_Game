@@ -45,7 +45,6 @@ public class Game_Instance
     {
         this.is_running = true;
         this.random_mole_animation();
-        //this.schedule_game_stop();
     }
 
     /**
@@ -58,9 +57,6 @@ public class Game_Instance
      */
     public void random_mole_animation()
     {
-        Random random = new Random();
-        this.is_running = true;
-
         handler.postDelayed(new Runnable()
         {
             @Override

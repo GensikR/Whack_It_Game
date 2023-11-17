@@ -23,11 +23,13 @@ import java.util.ArrayList;
 
 /**
  * Represents the main game activity for Whack-a-Mole.
+ *
  */
 public class Game_Activity extends AppCompatActivity
 {
     //List to hold the IDs of mole views that will be animated
     public static ArrayList<ImageView> mole_viewsId_list = new ArrayList<>();
+    //test
     private Game_Instance game_instance;
     private CountDownTimer timer;
     private TextView timer_text;
