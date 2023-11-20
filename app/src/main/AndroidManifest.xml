@@ -43,6 +43,15 @@
             android:name=".game.Game_Over_Activity"
             android:label="Game Over Activity">
         </activity>
+        
+        <activity
+            android:name=".extras.Extras_Activity"
+                android:label="Extras Activity">
+        </activity>
+        <activity
+            android:name=".extras.Tutorial_Activity"
+            android:label="Tutorial Activity">
+        </activity>
         </application>
 
 </manifest>

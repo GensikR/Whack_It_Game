@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whack_it.Main_Activity;
+import com.example.whack_it.Sound;
 import com.example.whack_it.mk_mole.Mole;
 import com.example.whack_it.R;
 
@@ -40,11 +41,9 @@ public class Game_Activity extends AppCompatActivity
     private Button vibration_btn;
     private Button exit_btn;
     private Button continue_btn;
-    private boolean is_muted = false;
     private AudioManager audioManager;
     private TextView pause_text;
     private Vibrator vibrator;
-    private boolean is_vibrating = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,6 +52,7 @@ public class Game_Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //Set audio and vibration
         this.audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         this.vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -93,33 +93,11 @@ public class Game_Activity extends AppCompatActivity
         this.total_points_txt = findViewById(R.id.points);
     }
 
-    private void set_vibration_btn()
-    {   //TODO: Implement Vibration
-        this.vibration_btn.setOnClickListener( v ->
-        {
-            if (this.is_vibrating)
-            {
-                // Turn off vibration
-                this.vibration_btn.setText("Turn Vibration: ON");
-                this.vibrator.cancel();
-                this.is_vibrating = false;
-            }
-            else
-            {
-                // Turn on vibration
-                this.vibration_btn.setText("Turn Vibration: OFF");
-                long[] pattern = {0, 1000, 1000}; // Vibration pattern (0ms delay, vibrate for 1000ms, pause for 1000ms)
-                vibrator.vibrate(pattern, 0);
-                this.is_vibrating = true;
-            }
-        });
-    }
-
     private void set_mute_btn()
     {
         this.mute_btn.setOnClickListener( v ->
-        {//TODO: Implement Audio
-            if (this.is_muted)
+        {
+            if (Sound.is_muted)
             {
                 // Unmute the game
                 this.mute_btn.setText("Mute");
@@ -131,7 +109,29 @@ public class Game_Activity extends AppCompatActivity
                 this.mute_btn.setText("Unmute");
                 this.audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
             }
-            this.is_muted = !this.is_muted;
+            Sound.is_muted = !Sound.is_muted;
+        });
+    }
+
+    private void set_vibration_btn()
+    {
+        this.vibration_btn.setOnClickListener( v ->
+        {
+            if (Sound.is_vibrating)
+            {
+                // Turn off vibration
+                this.vibration_btn.setText("Turn Vibration: ON");
+                this.vibrator.cancel();
+                Sound.is_vibrating = false;
+            }
+            else
+            {
+                // Turn on vibration
+                this.vibration_btn.setText("Turn Vibration: OFF");
+                long[] pattern = {0, 1000, 1000}; // Vibration pattern (0ms delay, vibrate for 1000ms, pause for 1000ms)
+                vibrator.vibrate(pattern, 0);
+                Sound.is_vibrating = true;
+            }
         });
     }
 
