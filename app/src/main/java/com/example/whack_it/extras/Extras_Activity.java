@@ -14,7 +14,6 @@ import android.media.AudioManager;
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
 import com.example.whack_it.Sound;
-import com.example.whack_it.game.Game_Over_Activity;
 
 /**
  * Activity displaying game extras
@@ -52,8 +51,6 @@ public class Extras_Activity extends AppCompatActivity
         set_stats_btn();
         set_tutorial_btn();
         set_return_btn();
-
-
 
     }
 
