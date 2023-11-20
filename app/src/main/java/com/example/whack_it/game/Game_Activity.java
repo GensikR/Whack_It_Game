@@ -33,6 +33,7 @@ public class Game_Activity extends AppCompatActivity
     //test
     private Game_Instance game_instance;
     private CountDownTimer timer;
+    private long remaining_time;
     private TextView timer_text;
     private EditText total_points_txt;
     private View pause_view;
@@ -82,8 +83,11 @@ public class Game_Activity extends AppCompatActivity
         // TODO implement a way to vary game difficulty
         int mole_pop_freq = 500;
         int game_time = 20; // Changed to 20 seconds
-        this.game_instance = new Game_Instance(mole_pop_freq, game_time);
-        game_instance.start_game();
+
+        // Create a new instance if none exists
+        game_instance = new Game_Instance(mole_pop_freq, game_time);
+
+        this.game_instance.start_game();
 
         // Set timer
         timer_text = findViewById(R.id.timer);
@@ -93,6 +97,108 @@ public class Game_Activity extends AppCompatActivity
         this.total_points_txt = findViewById(R.id.points);
     }
 
+    /*
+        Timers Settings
+     */
+    /**
+     * Starts the countdown timer for the game.
+     *
+     * @param time The total time for the countdown timer.
+     */
+    private void start_timer(int time)
+    {
+        int total_time = time * 1000;
+        start_countdown_timer(total_time);
+    }
+
+    /**
+     * Initializes and starts the countdown timer.
+     *
+     * @param total_time_in_millis The total time in milliseconds for the countdown timer.
+     */
+    private void start_countdown_timer(long total_time_in_millis)
+    {
+        timer = new CountDownTimer(total_time_in_millis, 1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished)
+            {
+                update_timer_text(millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish()
+            {
+                // Handle actions when the timer finishes (e.g., end the game)
+                game_instance.stop_game();
+                change_to_game_over_activity();
+            }
+        };
+
+        // Start the countdown timer
+        timer.start();
+    }
+
+    /**
+     * Updates the timer text based on the remaining time.
+     *
+     * @param millisUntilFinished The time remaining in milliseconds.
+     */
+    private void update_timer_text(long millisUntilFinished)
+    {
+        this.remaining_time = millisUntilFinished;
+        long minutes = millisUntilFinished / 60000;
+        long seconds = (millisUntilFinished % 60000) / 1000;
+        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
+        timer_text.setText(timeLeftFormatted);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        // Cancel the countdown timer to prevent memory leaks
+        if (timer != null)
+        {
+            timer.cancel();
+        }
+    }
+
+    /**
+     * Handles the click event on a mole view.
+     *
+     * @param view The clicked mole view.
+     */
+    public void on_mole_click(View view)
+    {
+        game_instance.add_points(1);    // TODO: Check if it is a good or bad mole to add or remove points
+        this.total_points_txt.setText("" + game_instance.get_total_points());
+        ObjectAnimator moveDown = ObjectAnimator.ofFloat(view, "translationY", 5);
+        moveDown.setDuration(1000);
+        moveDown.start();
+    }
+
+    /*
+     Pause Menu UI Elements
+    */
+    private void set_pause_btn()
+    {
+        this.pause_btn.setOnClickListener( v ->
+        {   //TODO: Implement way to pause the whole game
+            if (timer != null)
+            {
+                timer.cancel();
+            }
+            this.game_instance.stop_game();
+            //Make Everything Visible
+            this.pause_view.setVisibility(View.VISIBLE);
+            this.pause_text.setVisibility(View.VISIBLE);
+            this.mute_btn.setVisibility(View.VISIBLE);
+            this.vibration_btn.setVisibility(View.VISIBLE);
+            this.continue_btn.setVisibility(View.VISIBLE);
+            this.exit_btn.setVisibility(View.VISIBLE);
+        });
+    }
     private void set_mute_btn()
     {
         this.mute_btn.setOnClickListener( v ->
@@ -148,7 +254,10 @@ public class Game_Activity extends AppCompatActivity
     private void set_continue_btn()
     {
         this.continue_btn.setOnClickListener( v ->
-        {   //TODO: implement way to continue game from pause state
+        {
+            this.game_instance.set_is_running(true);
+            start_countdown_timer(this.remaining_time);
+            this.game_instance.start_game();
             //Make Everything Disappear
             this.pause_view.setVisibility(View.GONE);
             this.pause_text.setVisibility(View.GONE);
@@ -158,83 +267,6 @@ public class Game_Activity extends AppCompatActivity
             this.exit_btn.setVisibility(View.GONE);
             this.pause_view.setVisibility(View.GONE);
         });
-    }
-
-    private void set_pause_btn()
-    {
-        this.pause_btn.setOnClickListener( v ->
-        {   //TODO: Implement way to pause the whole game
-            //Make Everything Visible
-            this.pause_view.setVisibility(View.VISIBLE);
-            this.pause_text.setVisibility(View.VISIBLE);
-            this.mute_btn.setVisibility(View.VISIBLE);
-            this.vibration_btn.setVisibility(View.VISIBLE);
-            this.continue_btn.setVisibility(View.VISIBLE);
-            this.exit_btn.setVisibility(View.VISIBLE);
-        });
-    }
-
-    /**
-     * Starts the countdown timer for the game.
-     *
-     * @param time The total time for the countdown timer.
-     */
-    private void start_timer(int time)
-    {
-        int total_time = time * 1000;
-        start_countdown_timer(total_time);
-    }
-
-    /**
-     * Initializes and starts the countdown timer.
-     *
-     * @param totalTimeInMillis The total time in milliseconds for the countdown timer.
-     */
-    private void start_countdown_timer(long totalTimeInMillis)
-    {
-        timer = new CountDownTimer(totalTimeInMillis, 1000)
-        {
-            @Override
-            public void onTick(long millisUntilFinished)
-            {
-                update_timer_text(millisUntilFinished);
-            }
-
-            @Override
-            public void onFinish()
-            {
-                // Handle actions when the timer finishes (e.g., end the game)
-                game_instance.stop_game();
-                change_to_game_over_activity();
-            }
-        };
-
-        // Start the countdown timer
-        timer.start();
-    }
-
-    /**
-     * Updates the timer text based on the remaining time.
-     *
-     * @param millisUntilFinished The time remaining in milliseconds.
-     */
-    private void update_timer_text(long millisUntilFinished)
-    {
-        long minutes = millisUntilFinished / 60000;
-        long seconds = (millisUntilFinished % 60000) / 1000;
-        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
-        timer_text.setText(timeLeftFormatted);
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        // Cancel the countdown timer to prevent memory leaks
-        if (timer != null)
-        {
-            timer.cancel();
-        }
     }
 
     // Populates the mole_viewsId_list with mole views from the layout
@@ -278,25 +310,12 @@ public class Game_Activity extends AppCompatActivity
     }
 
     /**
-     * Handles the click event on a mole view.
-     *
-     * @param view The clicked mole view.
-     */
-    public void on_mole_click(View view)
-    {
-        game_instance.add_points(1);    // TODO: Check if it is a good or bad mole to add or remove points
-        this.total_points_txt.setText("" + game_instance.get_total_points());
-        ObjectAnimator moveDown = ObjectAnimator.ofFloat(view, "translationY", 5);
-        moveDown.setDuration(1000);
-        moveDown.start();
-    }
-
-    /**
      * Changes to the Game Over activity.
      */
     public void change_to_game_over_activity()
     {
         Intent intent = new Intent(Game_Activity.this, Game_Over_Activity.class);
-        startActivity( intent);
+        finish();
+        startActivity(intent);
     }
 }

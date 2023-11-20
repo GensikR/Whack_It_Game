@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public class Game_Instance
 {
+
     // Game state variables
     private boolean is_running;
     private int mole_pop_freq;
@@ -21,6 +22,9 @@ public class Game_Instance
     private int good_taps;
     private int bad_taps;
     private int game_time;
+    private Runnable mole_animation_runn;
+    private Handler handler = new Handler();
+    private ObjectAnimator mole_animation;
 
     /**
      * Constructor for initializing a Game_Instance.
@@ -30,7 +34,7 @@ public class Game_Instance
      */
     public Game_Instance(int mole_pop_freq, int game_time)
     {
-        this.is_running = false;
+        set_is_running(false);
         this.mole_pop_freq = mole_pop_freq;
         this.total_points = 0;
         this.good_taps = 0;
@@ -43,35 +47,29 @@ public class Game_Instance
      */
     void start_game()
     {
-        this.is_running = true;
+        set_is_running(true);
         this.random_mole_animation();
     }
-
-    /**
-     * Animation handler for random mole appearance.
-     */
-    private Handler handler = new Handler();
 
     /**
      * Initiates a random mole appearance animation.
      */
     public void random_mole_animation()
     {
-        handler.postDelayed(new Runnable()
-        {
+        mole_animation_runn = new Runnable() {
             @Override
-            public void run()
-            {
-                if (is_running)
-                {
-                    // Chooses a mole and animates its appearance
+            public void run() {
+                if (is_running) {
                     ImageView chosen_mole = choose_mole();
                     move_mole_up(chosen_mole);
-                    handler.postDelayed(this, mole_pop_freq);
+                    handler.postDelayed(mole_animation_runn, mole_pop_freq);
                 }
             }
-        }, mole_pop_freq);
+        };
+
+        handler.postDelayed(mole_animation_runn, mole_pop_freq);
     }
+
 
     /**
      * Chooses a random mole view and sets its image resource.
@@ -95,7 +93,7 @@ public class Game_Instance
     public void move_mole_up(ImageView mole_image)
     {
         mole_image.setVisibility(View.VISIBLE);
-        ObjectAnimator mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
+        this.mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
         mole_animation.setDuration(1000);
         mole_animation.start();
     }
@@ -105,8 +103,9 @@ public class Game_Instance
      */
     public void stop_game()
     {
-        this.is_running = false;
-        handler.removeCallbacksAndMessages(null); // Remove all callbacks and messages from the handler
+        set_is_running(false);
+        this.mole_animation.cancel();
+        handler.removeCallbacksAndMessages(this.mole_animation_runn); // Remove all callbacks and messages from the handler
         // TODO Add any other cleanup
     }
 
@@ -151,4 +150,17 @@ public class Game_Instance
     {
         return this.game_time;
     }
+
+    public void set_is_running(boolean is_running)
+    {
+        this.is_running = is_running;
+    }
+
+    public void reset_game() {
+        set_is_running(false);
+        total_points = 0;
+        handler.removeCallbacksAndMessages(mole_animation_runn); // Remove all callbacks and messages from the handler
+        // Reset any other game state variables as needed
+    }
+
 }
