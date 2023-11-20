@@ -1,7 +1,6 @@
 package com.example.whack_it.extras;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Stats
@@ -19,18 +18,6 @@ public class Stats
     {
         Stats.best_scores.add(score);
         Collections.sort(Stats.best_scores, Collections.reverseOrder());
-    }
-    public void update_accuracy()
-    {
-        this.accuracy = (Stats.good_taps / Stats.bad_taps);
-    }
-    public double get_accuracy()
-    {
-        return this.accuracy;
-    }
-    public void reset_accuracy()
-    {
-        this.accuracy = 0.0;
     }
 
 }

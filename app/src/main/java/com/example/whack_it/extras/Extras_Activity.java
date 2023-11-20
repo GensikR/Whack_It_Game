@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.media.AudioManager;
 
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
@@ -27,6 +28,20 @@ public class Extras_Activity extends AppCompatActivity
     private Button return_btn;
     private AudioManager audioManager;
     private Vibrator vibrator;
+    private View stats_view;
+    private Button close_btn;
+    private TextView top_list_txt;
+    private EditText score1;
+    private EditText score2;
+    private EditText score3;
+    private EditText score4;
+    private EditText score5;
+    private TextView good_taps_txt;
+    private EditText good_taps;
+    private TextView bad_taps_txt;
+    private EditText bad_taps;
+    private TextView acc_txt;
+    private  EditText accuracy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +67,80 @@ public class Extras_Activity extends AppCompatActivity
         set_tutorial_btn();
         set_return_btn();
 
+        //Set Stats View
+        this.stats_view = findViewById(R.id.stats_view);
+        this.close_btn = findViewById(R.id.close_btn);
+        set_close_btn();
+        this.top_list_txt = findViewById(R.id.top_list_txt);
+        this.score1 = findViewById(R.id.score_txt1);
+        this.score2 = findViewById(R.id.score_txt2);
+        this.score3 = findViewById(R.id.score_txt3);
+        this.score4 = findViewById(R.id.score_txt4);
+        this.score5 = findViewById(R.id.score_txt5);
+        this.good_taps_txt = findViewById(R.id.good_txt);
+        this.good_taps = findViewById(R.id.good_taps);
+        this.bad_taps_txt = findViewById(R.id.bad_txt);
+        this.bad_taps = findViewById(R.id.bad_taps);
+        this.acc_txt = findViewById(R.id.acc_txt);
+        this.accuracy = findViewById(R.id.accuracy);
+
+       //TODO: set_all_stats_txt(); to whenever we get stats implemented to the game activity
+
+    }
+
+    private void set_close_btn()
+    {
+        this.close_btn.setOnClickListener(v ->
+        {
+            hide_stats_view();
+        });
+    }
+
+    private void set_all_stats_txt()
+    {
+        this.score1.setText(Stats.best_scores.get(0));
+        this.score2.setText(Stats.best_scores.get(1));
+        this.score3.setText(Stats.best_scores.get(2));
+        this.score4.setText(Stats.best_scores.get(3));
+        this.score5.setText(Stats.best_scores.get(4));
+        this.good_taps.setText(Stats.good_taps);
+        this.bad_taps.setText(Stats.bad_taps);
+        this.accuracy.setText(Stats.good_taps / Stats.bad_taps);
+    }
+
+    private void spawn_stats_view()
+    {
+        this.stats_view.setVisibility(View.VISIBLE);
+        this.close_btn.setVisibility(View.VISIBLE);
+        this.top_list_txt.setVisibility(View.VISIBLE);
+        this.score1.setVisibility(View.VISIBLE);
+        this.score2.setVisibility(View.VISIBLE);
+        this.score3.setVisibility(View.VISIBLE);
+        this.score4.setVisibility(View.VISIBLE);
+        this.score5.setVisibility(View.VISIBLE);
+        this.good_taps_txt.setVisibility(View.VISIBLE);
+        this.good_taps.setVisibility(View.VISIBLE);
+        this.bad_taps_txt.setVisibility(View.VISIBLE);
+        this.bad_taps.setVisibility(View.VISIBLE);
+        this.acc_txt.setVisibility(View.VISIBLE);
+        this.accuracy.setVisibility(View.VISIBLE);
+    }
+    private void hide_stats_view()
+    {
+        this.stats_view.setVisibility(View.GONE);
+        this.close_btn.setVisibility(View.GONE);
+        this.top_list_txt.setVisibility(View.GONE);
+        this.score1.setVisibility(View.GONE);
+        this.score2.setVisibility(View.GONE);
+        this.score3.setVisibility(View.GONE);
+        this.score4.setVisibility(View.GONE);
+        this.score5.setVisibility(View.GONE);
+        this.good_taps_txt.setVisibility(View.GONE);
+        this.good_taps.setVisibility(View.GONE);
+        this.bad_taps_txt.setVisibility(View.GONE);
+        this.bad_taps.setVisibility(View.GONE);
+        this.acc_txt.setVisibility(View.GONE);
+        this.accuracy.setVisibility(View.GONE);
     }
 
     private void set_mute_btn()
@@ -97,7 +186,11 @@ public class Extras_Activity extends AppCompatActivity
     }
 
     private void set_stats_btn()
-    {//TODO: Set stats popup window
+    {
+        this.stats_btn.setOnClickListener(v ->
+        {
+            spawn_stats_view();
+        });
     }
 
     private void set_tutorial_btn()

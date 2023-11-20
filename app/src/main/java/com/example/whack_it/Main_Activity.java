@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.whack_it.extras.Extras_Activity;
+import com.example.whack_it.extras.Stats;
 import com.example.whack_it.game.Game_Activity;
 import com.example.whack_it.mk_mole.MkMole_Activity;
 
