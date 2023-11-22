@@ -65,19 +65,7 @@ public class Game_Activity extends AppCompatActivity
         this.vibration_btn = findViewById(R.id.vibrationBTN);
         this.continue_btn = findViewById(R.id.continueBTN);
         this.exit_btn = findViewById(R.id.exitBTN);
-        //Set Buttons Up
-        set_pause_btn();
-        set_mute_btn();
-        set_vibration_btn();
-        set_continue_btn();
-        set_exit_btn();
 
-        // Populates the mole_viewsId_list with mole views from the layout
-        populate_mole_views_list();
-
-        // Initializes good and bad moles
-        Mole.create_good_moles();
-        Mole.create_bad_moles();
 
         // Starts the game
         // TODO implement a way to vary game difficulty
@@ -95,6 +83,45 @@ public class Game_Activity extends AppCompatActivity
 
         //Set point tracker
         this.total_points_txt = findViewById(R.id.points);
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        Game_Activity.mole_viewsId_list.clear();
+        Mole.good_moles.clear();
+        Mole.bad_moles.clear();
+        finish();
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        //Set Buttons Up
+        set_pause_btn();
+        set_mute_btn();
+        set_vibration_btn();
+        set_continue_btn();
+        set_exit_btn();
+
+        // Populates the mole_viewsId_list with mole views from the layout
+        populate_mole_views_list();
+
+        // Initializes good and bad moles
+        Mole.create_good_moles();
+        Mole.create_bad_moles();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        // Cancel the countdown timer to prevent memory leaks
+        if (timer != null)
+        {
+            timer.cancel();
+        }
     }
 
     /*
@@ -151,17 +178,6 @@ public class Game_Activity extends AppCompatActivity
         long seconds = (millisUntilFinished % 60000) / 1000;
         String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
         timer_text.setText(timeLeftFormatted);
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        // Cancel the countdown timer to prevent memory leaks
-        if (timer != null)
-        {
-            timer.cancel();
-        }
     }
 
     /**

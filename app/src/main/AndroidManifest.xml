@@ -31,7 +31,7 @@
         <activity
             android:name=".game.Game_Activity"
             android:label="Game Activity"
-            >
+            android:clearTaskOnLaunch="true"            >
         </activity>
         <activity
             android:name=".mk_mole.MkMole_Activity"
