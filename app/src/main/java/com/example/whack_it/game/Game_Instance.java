@@ -81,8 +81,17 @@ public class Game_Instance
         Random random = new Random();
         int random_idx = random.nextInt(8);
         int random_idx2 = random.nextInt(9);
-        Game_Activity.mole_viewsId_list.get(random_idx).setImageResource(Mole.good_moles.get(random_idx2).getMole_image_id());
-        return Game_Activity.mole_viewsId_list.get(random_idx);
+        //Checks if is user made to get either Bitmap or resource ID
+        if(Mole.good_moles.get(random_idx2).is_user_made())
+        {
+            Game_Activity.mole_viewsId_list.get(random_idx).setImageBitmap(Mole.good_moles.get(random_idx2).get_mole_bitmap());
+            return Game_Activity.mole_viewsId_list.get(random_idx);
+        }
+        else
+        {
+            Game_Activity.mole_viewsId_list.get(random_idx).setImageResource(Mole.good_moles.get(random_idx2).getMole_image_id());
+            return Game_Activity.mole_viewsId_list.get(random_idx);
+        }
     }
 
     /**

@@ -26,7 +26,7 @@ public class MkMole_Activity extends AppCompatActivity {
     private static final int GALLERY_REQ_CODE = 1000;
     private static final int CAMERA_REQ_CODE = 1001;
 
-    private ImageView user_image;
+    private Bitmap user_bitmap;
     private String user_name;
     private Button select_imgBTN;
     private View popup_menu_anchor;
@@ -68,24 +68,16 @@ public class MkMole_Activity extends AppCompatActivity {
     {
         this.create_moleBTN.setOnClickListener(v ->
         {
-            // Check if required fields are properly filled
-            if (this.name_input.getText().toString().isEmpty() || user_image.getDrawable() == null || (this.yes_box.isChecked() == this.no_box.isChecked()) || (!this.yes_box.isChecked() && this.no_box.isChecked()))
-            {
-                // TODO: add error handling for when one of the fields is not properly filled
-                return;
-            }
-            else
-            {
-                //TODO: test that the moles are created and added to their respective list
-                //Get user name
-                this.user_name = this.name_input.getText().toString();
-                //Get the resource ID of the user-selected image
-                int userImageResource = getResources().getIdentifier(getResources().getResourceEntryName(user_image.getId()), "drawable", getPackageName());
-                // Use the user-selected image resource ID for the Mole object
-                Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), userImageResource);
-                Mole.add_mole_to_list(new_mole);
-            }
-            // TODO: Add a button or something to show the user the mole was created
+            // TODO: add error handling for when one of the fields is not properly filled
+
+            //TODO: test that the moles are created and added to their respective list
+            //Get user name
+            this.user_name = this.name_input.getText().toString();
+            // Use the user-selected image resource ID for the Mole object
+            Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), this.user_bitmap, true);
+            Mole.add_mole_to_list(new_mole);
+
+        // TODO: Add a button or something to show the user the mole was created
         });
     }
 
@@ -185,16 +177,16 @@ public class MkMole_Activity extends AppCompatActivity {
         if (resultCode == RESULT_OK)
         {
             if (requestCode == GALLERY_REQ_CODE)
-            {//TODO: test that we are correctly getting the image
+            {//TODO: Implement what to do with the recovered URI from gallery
                 // Set the mole_image to the selected image from the gallery
-                this.user_image.setImageURI(data.getData());
+                //this.user_image.setImageURI(data.getData());
             }
             else if (requestCode == CAMERA_REQ_CODE)
-            {   //TODO: App is failing to recover result
+            {   //TODO: Adjust picture size so that the face shows as the mole
                 // BitMap is data structure of image file which store the image in memory
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 // Set the image in imageview for display
-                this.user_image.setImageBitmap(photo);
+                this.user_bitmap = photo;
             }
         }
     }
