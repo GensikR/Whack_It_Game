@@ -86,16 +86,20 @@ public class Game_Instance
         if(Mole.good_moles.get(random_idx2).get_img_src() == Img_Src.CAMERA)
         {
             Game_Activity.mole_viewsId_list.get(random_idx).setImageBitmap(Mole.good_moles.get(random_idx2).get_mole_bitmap());
+            //send Mole so that we can verify if is good or bad
+            Game_Activity.mole_viewsId_list.get(random_idx).setTag(Mole.good_moles.get(random_idx2));
             return Game_Activity.mole_viewsId_list.get(random_idx);
         }
         else if(Mole.good_moles.get(random_idx2).get_img_src() == Img_Src.GALLERY)
         {
             Game_Activity.mole_viewsId_list.get(random_idx).setImageURI(Mole.good_moles.get(random_idx2).get_mole_uri());
+            Game_Activity.mole_viewsId_list.get(random_idx).setTag(Mole.good_moles.get(random_idx2));
             return Game_Activity.mole_viewsId_list.get(random_idx);
         }
         else
         {
             Game_Activity.mole_viewsId_list.get(random_idx).setImageResource(Mole.good_moles.get(random_idx2).getMole_image_id());
+            Game_Activity.mole_viewsId_list.get(random_idx).setTag(Mole.good_moles.get(random_idx2));
             return Game_Activity.mole_viewsId_list.get(random_idx);
         }
     }

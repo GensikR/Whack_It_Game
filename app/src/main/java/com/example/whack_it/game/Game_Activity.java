@@ -187,7 +187,15 @@ public class Game_Activity extends AppCompatActivity
      */
     public void on_mole_click(View view)
     {
-        game_instance.add_points(1);    // TODO: Check if it is a good or bad mole to add or remove points
+        Mole mole = (Mole)view.getTag();
+        if(mole.is_mole_bad())
+        {
+            game_instance.remove_points(1);
+        }
+        else
+        {
+            game_instance.add_points(1);
+        }
         this.total_points_txt.setText("" + game_instance.get_total_points());
         ObjectAnimator moveDown = ObjectAnimator.ofFloat(view, "translationY", 5);
         moveDown.setDuration(1000);
@@ -200,7 +208,7 @@ public class Game_Activity extends AppCompatActivity
     private void set_pause_btn()
     {
         this.pause_btn.setOnClickListener( v ->
-        {   //TODO: Implement way to pause the whole game
+        {   //pause the whole game
             if (timer != null)
             {
                 timer.cancel();
@@ -260,7 +268,7 @@ public class Game_Activity extends AppCompatActivity
     private void set_exit_btn()
     {
         this.exit_btn.setOnClickListener( v ->
-        {   //TODO: Make sure to clear everything from exited game
+        {
             //Changes to game over activity
             Intent intent = new Intent(Game_Activity.this, Game_Over_Activity.class);
             startActivity(intent);
@@ -288,42 +296,21 @@ public class Game_Activity extends AppCompatActivity
     // Populates the mole_viewsId_list with mole views from the layout
     private void populate_mole_views_list()
     {
+        int[] moleViewIds =
+                {
+                    R.id.mole0, R.id.mole1, R.id.mole2,
+                    R.id.mole3, R.id.mole4, R.id.mole5,
+                    R.id.mole6, R.id.mole7, R.id.mole8
+                };
+
         for (int i = 0; i < 9; i++)
         {
-            switch (i)
-            {
-                case 0:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole0));
-                    break;
-                case 1:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole1));
-                    break;
-                case 2:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole2));
-                    break;
-                case 3:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole3));
-                    break;
-                case 4:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole4));
-                    break;
-                case 5:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole5));
-                    break;
-                case 6:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole6));
-                    break;
-                case 7:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole7));
-                    break;
-                case 8:
-                    this.mole_viewsId_list.add(findViewById(R.id.mole8));
-                    break;
-                default:
-                    break;
-            }
+            ImageView moleView = findViewById(moleViewIds[i]);
+            // Set the Mole instance as the tag for the ImageView
+            this.mole_viewsId_list.add(moleView);
         }
     }
+
 
     /**
      * Changes to the Game Over activity.

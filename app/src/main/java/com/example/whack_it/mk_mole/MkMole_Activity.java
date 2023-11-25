@@ -75,8 +75,6 @@ public class MkMole_Activity extends AppCompatActivity {
         this.create_moleBTN.setOnClickListener(v ->
         {
             // TODO: add error handling for when one of the fields is not properly filled
-
-            //TODO: test that the moles are created and added to their respective list
             //Get user name
             this.user_name = this.name_input.getText().toString();
             if(this.img_src == Img_Src.GALLERY)
@@ -94,6 +92,7 @@ public class MkMole_Activity extends AppCompatActivity {
 
 
         // TODO: Add a button or something to show the user the mole was created
+            //TODO: Return to main menu button
         });
     }
 
@@ -116,7 +115,6 @@ public class MkMole_Activity extends AppCompatActivity {
             {
                 String decision = item.getTitle().toString();
                 start_photo_interface(decision);
-                //TODO: show preview picture on the screen
                 return true;
             });
 
@@ -204,7 +202,6 @@ public class MkMole_Activity extends AppCompatActivity {
         {
             // Permission is not granted, request it
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQ_CODE);
-            //TODO: make it so that the camera launches after receiving permission(currently we need to click the button again)
         }
         else
         {
@@ -229,13 +226,13 @@ public class MkMole_Activity extends AppCompatActivity {
         if (resultCode == RESULT_OK)
         {
             if (requestCode == GALLERY_REQ_CODE)
-            {//TODO: Implement what to do with the recovered URI from gallery
+            {
                 // Set the mole_image to the selected image from the gallery
                 this.user_uri = data.getData();
             }
             else if (requestCode == CAMERA_REQ_CODE)
             {   //TODO: Adjust picture size so that the face shows as the mole
-                // BitMap is data structure of image file which store the image in memory
+                //BitMap is data structure of image file which store the image in memory
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 // Set the image in imageview for display
                 this.user_bitmap = photo;

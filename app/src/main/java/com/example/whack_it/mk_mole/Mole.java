@@ -76,7 +76,7 @@ public class Mole {
      *
      * @return True if the mole is bad, false otherwise.
      */
-    private boolean is_mole_bad()
+    public boolean is_mole_bad()
     {
         return this.is_bad;
     }
@@ -133,7 +133,8 @@ public class Mole {
     public void remove_mole(boolean is_bad)
     {
         ArrayList<Mole> mole_list = is_bad ? this.bad_moles : this.good_moles;
-        for (int i = 0; i < mole_list.size(); i++)
+        int i;
+        for (i = 0; i < mole_list.size(); i++)
         {
             if (mole_list.get(i).get_img_src() == Img_Src.DEFAULT)
             {
@@ -141,7 +142,7 @@ public class Mole {
                 return;
             }
         }
-        // TODO: Add error handling when all moles in the list are user-made
+        mole_list.remove(i);
     }
 
     /**
