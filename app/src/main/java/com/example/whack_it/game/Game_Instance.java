@@ -17,12 +17,15 @@ public class Game_Instance
 {
 
     // Game state variables
+    private Difficulty game_difficulty;
     private boolean is_running;
     private int mole_pop_freq;
+    private int game_time;
+    private int streak_target;
     private int total_points;
     private int good_taps;
     private int bad_taps;
-    private int game_time;
+
     private Runnable mole_animation_runn;
     private Handler handler = new Handler();
     private ObjectAnimator mole_animation;
@@ -30,23 +33,33 @@ public class Game_Instance
     /**
      * Constructor for initializing a Game_Instance.
      *
-     * @param mole_pop_freq The frequency at which moles pop up.
-     * @param game_time     The total duration of the game.
+     * @param difficulty chosen difficulty
      */
-    public Game_Instance(int mole_pop_freq, int game_time)
+    public Game_Instance(Difficulty difficulty)
     {
         set_is_running(false);
-        this.mole_pop_freq = mole_pop_freq;
+        this.game_difficulty = difficulty;
+        set_game_settings();
+        init_stats();
+    }
+
+    private void init_stats()
+    {
         this.total_points = 0;
         this.good_taps = 0;
         this.bad_taps = 0;
-        this.game_time = game_time;
     }
 
+    private void set_game_settings()
+    {
+        this.mole_pop_freq = this.game_difficulty.getMole_pop_freq();
+        this.game_time = this.game_difficulty.getInitial_time();
+        this.streak_target = this.game_difficulty.getStreak_to_special_ability();
+    }
     /**
      * Start the game.
      */
-    void start_game()
+    public void start_game()
     {
         set_is_running(true);
         this.random_mole_animation();
@@ -125,7 +138,6 @@ public class Game_Instance
         set_is_running(false);
         this.mole_animation.cancel();
         handler.removeCallbacksAndMessages(this.mole_animation_runn); // Remove all callbacks and messages from the handler
-        // TODO Add any other cleanup
     }
 
     // Methods for points management

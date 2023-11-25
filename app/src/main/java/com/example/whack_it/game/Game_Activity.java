@@ -32,6 +32,8 @@ public class Game_Activity extends AppCompatActivity
     public static ArrayList<ImageView> mole_viewsId_list = new ArrayList<>();
     //test
     private Game_Instance game_instance;
+    private String difficulty;
+    private Difficulty game_difficulty;
     private CountDownTimer timer;
     private long remaining_time;
     private TextView timer_text;
@@ -52,6 +54,7 @@ public class Game_Activity extends AppCompatActivity
         // Initializes the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Intent this_intent = getIntent();
 
         //Set audio and vibration
         this.audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -68,12 +71,12 @@ public class Game_Activity extends AppCompatActivity
 
 
         // Starts the game
-        // TODO implement a way to vary game difficulty
-        int mole_pop_freq = 500;
-        int game_time = 20; // Changed to 20 seconds
 
+        // Get Difficulty
+        this.difficulty = this_intent.getStringExtra("difficulty");
+        this.game_difficulty = new Difficulty(this.difficulty);
         // Create a new instance if none exists
-        game_instance = new Game_Instance(mole_pop_freq, game_time);
+        game_instance = new Game_Instance(this.game_difficulty);
 
         this.game_instance.start_game();
 
