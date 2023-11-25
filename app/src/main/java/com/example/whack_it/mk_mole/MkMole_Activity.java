@@ -3,19 +3,23 @@ package com.example.whack_it.mk_mole;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.whack_it.Img_Src;
 import com.example.whack_it.R;
 import android.Manifest;
 
@@ -27,6 +31,8 @@ public class MkMole_Activity extends AppCompatActivity {
     private static final int CAMERA_REQ_CODE = 1001;
 
     private Bitmap user_bitmap;
+    private Uri user_uri;
+    private Img_Src img_src;
     private String user_name;
     private Button select_imgBTN;
     private View popup_menu_anchor;
@@ -73,9 +79,19 @@ public class MkMole_Activity extends AppCompatActivity {
             //TODO: test that the moles are created and added to their respective list
             //Get user name
             this.user_name = this.name_input.getText().toString();
-            // Use the user-selected image resource ID for the Mole object
-            Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), this.user_bitmap, true);
-            Mole.add_mole_to_list(new_mole);
+            if(this.img_src == Img_Src.GALLERY)
+            {
+                // Use the user-selected image Uri for the Mole object
+                Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), this.user_uri, this.img_src);
+                Mole.add_mole_to_list(new_mole);
+            }
+            else
+            {
+                // Use the user-selected image Bitmap for the Mole object
+                Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), this.user_uri, this.img_src);
+                Mole.add_mole_to_list(new_mole);
+            }
+
 
         // TODO: Add a button or something to show the user the mole was created
         });
@@ -119,9 +135,11 @@ public class MkMole_Activity extends AppCompatActivity {
         switch (decision)
         {
             case ("Choose From Gallery"):
+                this.img_src = Img_Src.GALLERY;
                 gallery();
                 break;
             case ("Take Picture"):
+                this.img_src = Img_Src.CAMERA;
                 start_camera();
                 break;
             case ("Choose From Stock"):
@@ -132,16 +150,50 @@ public class MkMole_Activity extends AppCompatActivity {
         }
     }
 
+    private void gallery()
+    {
+        open_gallery();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == GALLERY_REQ_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Log.d("MkMole_Activity", "READ_EXTERNAL_STORAGE permission granted, opening gallery");
+                open_gallery();
+            } else
+            {
+                Log.d("MkMole_Activity", "READ_EXTERNAL_STORAGE permission denied");
+                // Handle permission denied case
+            }
+        }
+    }
+
+
+
     /**
      * Opens the gallery for image selection.
      */
-    private void gallery()
+    private void open_gallery()
     {
+
         // Create an intent to pick an image from the gallery
-        Intent gallery = new Intent(Intent.ACTION_PICK);
-        gallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, GALLERY_REQ_CODE);
+        Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(Intent.createChooser(gallery, "Select File"), GALLERY_REQ_CODE);
+
+        /*
+        gallery.setType("image/*");
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            gallery.putExtra(Intent.ACTION_GET_CONTENT, true);
+        }
+        */
+
     }
+
+
 
     /**
      * Starts the camera for taking a picture.
@@ -179,7 +231,7 @@ public class MkMole_Activity extends AppCompatActivity {
             if (requestCode == GALLERY_REQ_CODE)
             {//TODO: Implement what to do with the recovered URI from gallery
                 // Set the mole_image to the selected image from the gallery
-                //this.user_image.setImageURI(data.getData());
+                this.user_uri = data.getData();
             }
             else if (requestCode == CAMERA_REQ_CODE)
             {   //TODO: Adjust picture size so that the face shows as the mole
@@ -191,3 +243,6 @@ public class MkMole_Activity extends AppCompatActivity {
         }
     }
 }
+
+
+

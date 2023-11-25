@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.whack_it.Img_Src;
 import com.example.whack_it.mk_mole.Mole;
 
 import java.util.Random;
@@ -79,12 +80,17 @@ public class Game_Instance
     public ImageView choose_mole()
     {
         Random random = new Random();
-        int random_idx = random.nextInt(8);
+        int random_idx = random.nextInt(9);
         int random_idx2 = random.nextInt(9);
         //Checks if is user made to get either Bitmap or resource ID
-        if(Mole.good_moles.get(random_idx2).is_user_made())
+        if(Mole.good_moles.get(random_idx2).get_img_src() == Img_Src.CAMERA)
         {
             Game_Activity.mole_viewsId_list.get(random_idx).setImageBitmap(Mole.good_moles.get(random_idx2).get_mole_bitmap());
+            return Game_Activity.mole_viewsId_list.get(random_idx);
+        }
+        else if(Mole.good_moles.get(random_idx2).get_img_src() == Img_Src.GALLERY)
+        {
+            Game_Activity.mole_viewsId_list.get(random_idx).setImageURI(Mole.good_moles.get(random_idx2).get_mole_uri());
             return Game_Activity.mole_viewsId_list.get(random_idx);
         }
         else

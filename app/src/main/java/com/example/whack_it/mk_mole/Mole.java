@@ -1,7 +1,9 @@
 package com.example.whack_it.mk_mole;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
+import com.example.whack_it.Img_Src;
 import com.example.whack_it.R;
 
 import java.util.ArrayList;
@@ -16,8 +18,9 @@ public class Mole {
     private boolean is_bad;
     private int mole_image_id;
     private Bitmap mole_bitmap;
+    private Uri mole_uri;
     private boolean is_hidden = true;
-    private boolean user_made;
+    private Img_Src img_src;
 
     // Lists to hold good and bad moles
     public static ArrayList<Mole> good_moles = new ArrayList<>();
@@ -31,12 +34,12 @@ public class Mole {
      * @param is_bad         Whether the mole is "bad" or not.
      * @param mole_image_id  The resource ID of the mole image.
      */
-    public Mole(String name, boolean is_bad, int mole_image_id, boolean user_made)
+    public Mole(String name, boolean is_bad, int mole_image_id, Img_Src src)
     {
         this.name = name;
         this.is_bad = is_bad;
         this.mole_image_id = mole_image_id;
-        this.user_made = user_made;
+        this.img_src = src;
     }
     /**
      * Constructor to initialize mole attributes with bitmap image
@@ -45,12 +48,27 @@ public class Mole {
      * @param is_bad         Whether the mole is "bad" or not.
      * @param mole_bitmap  The resource ID of the mole image.
      */
-    public Mole(String name, boolean is_bad, Bitmap mole_bitmap, boolean user_made)
+    public Mole(String name, boolean is_bad, Bitmap mole_bitmap, Img_Src src)
     {
         this.name = name;
         this.is_bad = is_bad;
         this.mole_bitmap = mole_bitmap;
-        this.user_made = user_made;
+        this.img_src = src;
+    }
+
+    /**
+     * Constructor to initialize mole attributes with bitmap image
+     *
+     * @param name           The name of the mole.
+     * @param is_bad         Whether the mole is "bad" or not.
+     * @param mole_uri  The Uri ID of the mole image.
+     */
+    public Mole(String name, boolean is_bad, Uri mole_uri, Img_Src src)
+    {
+        this.name = name;
+        this.is_bad = is_bad;
+        this.mole_uri = mole_uri;
+        this.img_src = src;
     }
 
     /**
@@ -73,14 +91,19 @@ public class Mole {
         return this.mole_image_id;
     }
 
-    public boolean is_user_made()
+    public Img_Src get_img_src()
     {
-        return user_made;
+        return this.img_src;
     }
 
     public Bitmap get_mole_bitmap()
     {
         return mole_bitmap;
+    }
+
+    public Uri get_mole_uri()
+    {
+        return mole_uri;
     }
 
     /**
@@ -112,7 +135,7 @@ public class Mole {
         ArrayList<Mole> mole_list = is_bad ? this.bad_moles : this.good_moles;
         for (int i = 0; i < mole_list.size(); i++)
         {
-            if (!mole_list.get(i).user_made)
+            if (mole_list.get(i).get_img_src() == Img_Src.DEFAULT)
             {
                 mole_list.remove(i);
                 return;
@@ -129,7 +152,7 @@ public class Mole {
         List<String> good_names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace", "Henry", "Ivy", "Jack");
         for (int i = 0; i < good_names.size(); i++)
         {
-            Mole.add_mole_to_list(new Mole(good_names.get(i), false, R.drawable.mole, false));
+            Mole.add_mole_to_list(new Mole(good_names.get(i), false, R.drawable.mole, Img_Src.DEFAULT));
         }
     }
 
@@ -142,7 +165,7 @@ public class Mole {
 
         for (int i = 0; i < bad_names.size(); i++)
         {
-            Mole.add_mole_to_list(new Mole(bad_names.get(i), true, R.drawable.mole, false));
+            Mole.add_mole_to_list(new Mole(bad_names.get(i), true, R.drawable.mole, Img_Src.DEFAULT));
         }
     }
 }
