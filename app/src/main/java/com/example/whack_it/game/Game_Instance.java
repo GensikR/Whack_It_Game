@@ -170,13 +170,34 @@ public class Game_Instance
         Mole this_mole = (Mole)mole_image.getTag();
         if(this_mole.isIs_hidden())
         {
+            this_mole.set_is_hidden(false);
             mole_image.setVisibility(View.VISIBLE);
             this.mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
             mole_animation.setDuration(1000);
             mole_animation.start();
-            this_mole.set_is_hidden(false);
+            // Delay for 3 seconds and then start the down animation
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(is_running) {
+                        ObjectAnimator moveDown = ObjectAnimator.ofFloat(mole_image, "translationY", 0);
+                        moveDown.setDuration(1000);
+                        moveDown.start();
+                    }
+                }
+            }, 3000); // 3000 milliseconds (3 seconds)
+
+
         }
-        else return;
+        else if (!this_mole.isIs_hidden())
+        {
+            ObjectAnimator moveDown = ObjectAnimator.ofFloat(mole_image, "translationY", 0);
+            moveDown.setDuration(100);
+            moveDown.start();
+            this_mole.set_is_hidden(true);
+            mole_image.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**
