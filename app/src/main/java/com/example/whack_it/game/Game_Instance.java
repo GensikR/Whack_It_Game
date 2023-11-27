@@ -78,6 +78,7 @@ public class Game_Instance
             public void run() {
                 if (is_running) {
                     ImageView chosen_mole = choose_mole();
+
                     move_mole_up(chosen_mole);
                     handler.postDelayed(mole_animation_runn, mole_pop_freq);
                 }

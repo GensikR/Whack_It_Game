@@ -19,10 +19,8 @@ public class Game_Over_Activity extends AppCompatActivity
 {
     private Button play_againBTN;
     private Button return_menuBTN;
-    private TextView total_pointsTXT;
-    private TextView last_pointsTXT;
-    private EditText total_points_txt;
-    private EditText best_score_txt;
+    private TextView total_points_txt;
+    private TextView best_score_txt;
     private int total_points;
     private int good_taps;
     private int bad_taps;
@@ -42,6 +40,8 @@ public class Game_Over_Activity extends AppCompatActivity
         //Set the buttons up to return to the main menu or play again
         this.play_againBTN = findViewById(R.id.play_againBTN);
         this.return_menuBTN = findViewById(R.id.main_menuBTN);
+        this.total_points_txt = findViewById(R.id.total_points_txt);
+        this.best_score_txt = findViewById(R.id.best_score_txt);
         set_play_againBTN(play_againBTN);
         set_return_menuBTN(return_menuBTN);
 

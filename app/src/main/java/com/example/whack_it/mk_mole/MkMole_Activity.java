@@ -104,7 +104,7 @@ public class MkMole_Activity extends AppCompatActivity {
             else
             {
                 // Use the user-selected image Bitmap for the Mole object
-                Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), this.user_uri, this.img_src);
+                Mole new_mole = new Mole(this.user_name, this.yes_box.isChecked(), this.user_bitmap, this.img_src);
                 Mole.add_mole_to_list(new_mole);
             }
 
