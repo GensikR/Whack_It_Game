@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-	xmlns:android = "http://schemas.android.com/apk/res/android"
-	xmlns:app = "http://schemas.android.com/apk/res-auto"
-	xmlns:tools = "http://schemas.android.com/tools"
-	android:layout_width = "match_parent"
-	android:layout_height = "match_parent"
-	android:background = "#86afcf"
-	tools:context = ".game.Game_Activity"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                                   xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools = "http://schemas.android.com/tools"
+                                                   android:layout_width = "match_parent"
+                                                   android:layout_height = "match_parent"
+                                                   android:background = "#86afcf"
+                                                   tools:context = ".game.Game_Activity"
 	>
 
     <androidx.constraintlayout.widget.Guideline
@@ -18,19 +17,11 @@
 	    />
 
     <androidx.constraintlayout.widget.Guideline
-	    android:id = "@+id/guideline3"
-	    android:layout_width = "wrap_content"
-	    android:layout_height = "wrap_content"
-	    android:orientation = "horizontal"
-	    app:layout_constraintGuide_begin = "150dp"
-	    />
-
-    <androidx.constraintlayout.widget.Guideline
 	    android:id = "@+id/guideline4"
 	    android:layout_width = "wrap_content"
 	    android:layout_height = "wrap_content"
 	    android:orientation = "horizontal"
-	    app:layout_constraintGuide_begin = "450dp"
+	    app:layout_constraintGuide_begin = "504dp"
 	    />
 
     <androidx.constraintlayout.widget.Guideline
@@ -38,7 +29,7 @@
 	    android:layout_width = "wrap_content"
 	    android:layout_height = "wrap_content"
 	    android:orientation = "horizontal"
-	    app:layout_constraintGuide_begin = "300dp"
+	    app:layout_constraintGuide_begin = "397dp"
 	    />
 
     <androidx.constraintlayout.widget.Guideline
@@ -46,7 +37,7 @@
 	    android:layout_width = "wrap_content"
 	    android:layout_height = "wrap_content"
 	    android:orientation = "horizontal"
-	    app:layout_constraintGuide_begin = "600dp"
+	    app:layout_constraintGuide_begin = "615dp"
 	    />
 
     <androidx.constraintlayout.widget.Guideline
@@ -54,7 +45,7 @@
 	    android:layout_width = "wrap_content"
 	    android:layout_height = "wrap_content"
 	    android:orientation = "vertical"
-	    app:layout_constraintGuide_begin = "135dp"
+	    app:layout_constraintGuide_begin = "153dp"
 	    />
 
     <androidx.constraintlayout.widget.Guideline
@@ -66,15 +57,30 @@
 	    />
 
     <ImageView
+	    android:id = "@+id/background_img"
+	    android:layout_width = "848dp"
+	    android:layout_height = "1117dp"
+	    app:layout_constraintBottom_toBottomOf = "parent"
+	    app:layout_constraintEnd_toEndOf = "parent"
+	    app:layout_constraintHorizontal_bias = "0.4"
+	    app:layout_constraintStart_toStartOf = "parent"
+	    app:layout_constraintTop_toTopOf = "parent"
+	    app:layout_constraintVertical_bias = "0.536"
+	    app:srcCompat = "@drawable/game_background"
+	    />
+
+    <ImageView
 	    android:id = "@+id/mole0"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
 	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole0"
-	    app:layout_constraintStart_toStartOf = "@+id/hole0"
-	    app:layout_constraintTop_toTopOf = "@+id/hole0"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	    app:layout_constraintHorizontal_bias = "0.485"
+	    app:layout_constraintStart_toStartOf = "parent"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	    app:layout_constraintVertical_bias = "0.638"
 	    />
 
     <ImageView
@@ -83,35 +89,39 @@
 	    android:layout_height = "50dp"
 	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole1"
-	    app:layout_constraintStart_toStartOf = "@+id/hole1"
-	    app:layout_constraintTop_toTopOf = "@+id/hole1"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	    app:layout_constraintVertical_bias = "0.638"
 	    />
 
     <ImageView
 	    android:id = "@+id/mole2"
 	    android:layout_width = "50dp"
 	    android:layout_height = "50dp"
+	    android:layout_marginBottom = "20dp"
 	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole2"
+	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	    app:layout_constraintEnd_toEndOf = "parent"
+	    app:layout_constraintHorizontal_bias = "0.476"
 	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
 	    app:layout_constraintTop_toTopOf = "@+id/hole2"
-	    />
-
-    <ImageView
-	    android:id = "@+id/mole3"
-	    android:layout_width = "50dp"
-	    android:layout_height = "50dp"
-	    android:onClick = "on_mole_click"
-	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole3"
-	    app:layout_constraintStart_toStartOf = "@+id/hole3"
-	    app:layout_constraintTop_toTopOf = "@+id/hole3"
-	    />
+	    app:layout_constraintVertical_bias = "0.933"
+	    /><ImageView
+	android:id = "@+id/mole3"
+	android:layout_width = "50dp"
+	android:layout_height = "50dp"
+	android:onClick = "on_mole_click"
+	android:visibility = "invisible"
+	app:layout_constraintBottom_toBottomOf = "@+id/hole3"
+	app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	app:layout_constraintHorizontal_bias = "0.485"
+	app:layout_constraintStart_toStartOf = "parent"
+	app:layout_constraintTop_toBottomOf = "@+id/hole0"
+	app:layout_constraintVertical_bias = "0.586"
+	/>
 
     <ImageView
 	    android:id = "@+id/mole4"
@@ -119,10 +129,11 @@
 	    android:layout_height = "50dp"
 	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole4"
-	    app:layout_constraintStart_toStartOf = "@+id/hole4"
-	    app:layout_constraintTop_toTopOf = "@+id/hole4"
+	    app:layout_constraintBottom_toBottomOf = "@+id/hole4"
+	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	    app:layout_constraintTop_toTopOf = "@+id/guideline6"
+	    app:layout_constraintVertical_bias = "0.586"
 	    />
 
     <ImageView
@@ -131,178 +142,87 @@
 	    android:layout_height = "50dp"
 	    android:onClick = "on_mole_click"
 	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole5"
-	    app:layout_constraintStart_toStartOf = "@+id/hole5"
-	    app:layout_constraintTop_toTopOf = "@+id/hole5"
-	    />
-
-    <ImageView
-	    android:id = "@+id/mole6"
-	    android:layout_width = "50dp"
-	    android:layout_height = "50dp"
-	    android:layout_marginTop = "15dp"
-	    android:onClick = "on_mole_click"
-	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole6"
-	    app:layout_constraintHorizontal_bias = "0.507"
-	    app:layout_constraintStart_toStartOf = "@+id/hole6"
-	    app:layout_constraintTop_toTopOf = "@+id/hole6"
-	    app:layout_constraintVertical_bias = "0.34"
-	    />
-
-    <ImageView
-	    android:id = "@+id/mole7"
-	    android:layout_width = "50dp"
-	    android:layout_height = "50dp"
-	    android:onClick = "on_mole_click"
-	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole7"
-	    app:layout_constraintStart_toStartOf = "@+id/hole7"
-	    app:layout_constraintTop_toTopOf = "@+id/hole7"
-	    />
-
-    <ImageView
-	    android:id = "@+id/mole8"
-	    android:layout_width = "50dp"
-	    android:layout_height = "50dp"
-	    android:onClick = "on_mole_click"
-	    android:visibility = "invisible"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
-	    app:layout_constraintEnd_toEndOf = "@+id/hole8"
-	    app:layout_constraintStart_toStartOf = "@+id/hole8"
-	    app:layout_constraintTop_toTopOf = "@+id/hole8"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole0"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
-	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
-	    app:layout_constraintStart_toStartOf = "parent"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline3"
-	    app:layout_constraintVertical_bias = "1.0"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole1"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
-	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
-	    app:layout_constraintHorizontal_bias = "0.50"
-	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline3"
-	    app:layout_constraintVertical_bias = "1.0"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole2"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline5"
+	    app:layout_constraintBottom_toBottomOf = "@+id/hole5"
 	    app:layout_constraintEnd_toEndOf = "parent"
-	    app:layout_constraintHorizontal_bias = "0.50"
+	    app:layout_constraintHorizontal_bias = "0.476"
 	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline3"
-	    app:layout_constraintVertical_bias = "1.0"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole3"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
-	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
-	    app:layout_constraintHorizontal_bias = "0.50"
-	    app:layout_constraintStart_toStartOf = "parent"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline5"
-	    app:layout_constraintVertical_bias = "1.0"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole4"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
-	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
-	    app:layout_constraintHorizontal_bias = "0.50"
-	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline5"
-	    app:layout_constraintVertical_bias = "1"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole5"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline4"
-	    app:layout_constraintEnd_toEndOf = "parent"
-	    app:layout_constraintHorizontal_bias = "0.50"
-	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline5"
-	    app:layout_constraintVertical_bias = "1"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole6"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
-	    app:layout_constraintEnd_toStartOf = "@+id/guideline7"
-	    app:layout_constraintHorizontal_bias = "0.50"
-	    app:layout_constraintStart_toStartOf = "parent"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
-	    app:layout_constraintVertical_bias = "1"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole7"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
-	    app:layout_constraintEnd_toStartOf = "@+id/guideline8"
-	    app:layout_constraintHorizontal_bias = "0.50"
-	    app:layout_constraintStart_toStartOf = "@+id/guideline7"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
-	    app:layout_constraintVertical_bias = "1"
-	    app:srcCompat = "@drawable/hole"
-	    />
-
-    <ImageView
-	    android:id = "@+id/hole8"
-	    android:layout_width = "115dp"
-	    android:layout_height = "115dp"
-	    app:layout_constraintBottom_toTopOf = "@+id/guideline6"
-	    app:layout_constraintEnd_toEndOf = "parent"
-	    app:layout_constraintHorizontal_bias = "0.573"
-	    app:layout_constraintStart_toStartOf = "@+id/guideline8"
-	    app:layout_constraintTop_toTopOf = "@+id/guideline4"
-	    app:layout_constraintVertical_bias = "0.946"
-	    app:srcCompat = "@drawable/hole"
-	    />
-	<TextView
-		android:id = "@+id/timer"
-		android:layout_width = "129dp"
-		android:layout_height = "80dp"
-		android:text = "00:00"
-		android:textAlignment = "center"
-		android:textSize = "50dp"
-		app:layout_constraintBottom_toTopOf = "@+id/guideline2"
-		app:layout_constraintEnd_toStartOf = "@+id/guideline8"
-		app:layout_constraintStart_toStartOf = "@+id/guideline7"
-		app:layout_constraintTop_toTopOf = "parent"
-		/><TextView
+	    app:layout_constraintTop_toBottomOf = "@+id/hole2"
+	    app:layout_constraintVertical_bias = "0.59"
+	    /><ImageView
+	android:id = "@+id/hole0"
+	android:layout_width = "100dp"
+	android:layout_height = "100dp"
+	app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	app:layout_constraintHorizontal_bias = "0.603"
+	app:layout_constraintStart_toStartOf = "parent"
+	app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	app:layout_constraintVertical_bias = "1.0"
+	app:srcCompat = "@drawable/hole"
+	/><ImageView
+	android:id = "@+id/hole1"
+	android:layout_width = "100dp"
+	android:layout_height = "100dp"
+	app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	app:layout_constraintVertical_bias = "1.0"
+	app:srcCompat = "@drawable/hole"
+	/><ImageView
+	android:id = "@+id/hole2"
+	android:layout_width = "100dp"
+	android:layout_height = "100dp"
+	app:layout_constraintBottom_toTopOf = "@+id/guideline6"
+	app:layout_constraintEnd_toEndOf = "parent"
+	app:layout_constraintHorizontal_bias = "0.555"
+	app:layout_constraintStart_toStartOf = "@+id/guideline8"
+	app:layout_constraintTop_toTopOf = "@+id/guideline4"
+	app:layout_constraintVertical_bias = "1.0"
+	app:srcCompat = "@drawable/hole"
+	/><ImageView
+	android:id = "@+id/hole3"
+	android:layout_width = "100dp"
+	android:layout_height = "100dp"
+	app:layout_constraintBottom_toBottomOf = "parent"
+	app:layout_constraintEnd_toStartOf = "@+id/guideline7"
+	app:layout_constraintHorizontal_bias = "0.603"
+	app:layout_constraintStart_toStartOf = "parent"
+	app:layout_constraintTop_toTopOf = "@+id/guideline6"
+	app:layout_constraintVertical_bias = "1.0"
+	app:srcCompat = "@drawable/hole"
+	/><ImageView
+	android:id = "@+id/hole4"
+	android:layout_width = "100dp"
+	android:layout_height = "100dp"
+	app:layout_constraintBottom_toBottomOf = "parent"
+	app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	app:layout_constraintTop_toTopOf = "@+id/guideline6"
+	app:layout_constraintVertical_bias = "1.0"
+	app:srcCompat = "@drawable/hole"
+	/><ImageView
+	android:id = "@+id/hole5"
+	android:layout_width = "100dp"
+	android:layout_height = "100dp"
+	app:layout_constraintBottom_toBottomOf = "parent"
+	app:layout_constraintEnd_toEndOf = "parent"
+	app:layout_constraintStart_toStartOf = "@+id/guideline8"
+	app:layout_constraintTop_toTopOf = "@+id/guideline6"
+	app:layout_constraintVertical_bias = "1.0"
+	app:srcCompat = "@drawable/hole"
+	/><TextView
+	android:id = "@+id/timer"
+	android:layout_width = "129dp"
+	android:layout_height = "80dp"
+	android:text = "00:00"
+	android:textAlignment = "center"
+	android:textSize = "50dp"
+	app:layout_constraintBottom_toTopOf = "@+id/guideline2"
+	app:layout_constraintEnd_toStartOf = "@+id/guideline8"
+	app:layout_constraintStart_toStartOf = "@+id/guideline7"
+	app:layout_constraintTop_toTopOf = "parent"
+	/><TextView
 	android:id = "@+id/points_title"
 	android:layout_width = "wrap_content"
 	android:layout_height = "wrap_content"
@@ -337,12 +257,14 @@
 	app:layout_constraintEnd_toStartOf = "@+id/guideline7"
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/><View
 	android:id = "@+id/pause_view"
 	android:layout_width = "250dp"
 	android:layout_height = "450dp"
-	android:background = "@color/white"
-	android:visibility = "gone"
+	android:background = "#03A9F4"
+	android:visibility = "invisible"
 	app:layout_constraintBottom_toBottomOf = "parent"
 	app:layout_constraintEnd_toEndOf = "parent"
 	app:layout_constraintHorizontal_bias = "0.497"
@@ -357,62 +279,71 @@
 	android:layout_marginTop = "319dp"
 	android:layout_marginEnd = "54dp"
 	android:layout_marginBottom = "33dp"
+	android:backgroundTint = "@color/green"
 	android:text = "Exit Game"
+	android:textColor = "@color/black"
+	android:visibility = "invisible"
 	app:layout_constraintBottom_toBottomOf = "@+id/pause_view"
 	app:layout_constraintEnd_toEndOf = "@+id/pause_view"
 	app:layout_constraintStart_toStartOf = "@+id/pause_view"
 	app:layout_constraintTop_toTopOf = "@+id/pause_view"
 	app:layout_constraintVertical_bias = "0.0"
-	android:visibility="gone"
 	/><Button
 	android:id = "@+id/vibrationBTN"
 	android:layout_width = "wrap_content"
 	android:layout_height = "wrap_content"
 	android:layout_marginStart = "55dp"
 	android:layout_marginEnd = "54dp"
+	android:backgroundTint = "@color/green"
 	android:text = "Turn Vibration: Off"
+	android:textColor = "@color/black"
+	android:visibility = "invisible"
 	app:layout_constraintBottom_toBottomOf = "@+id/pause_view"
 	app:layout_constraintEnd_toEndOf = "@+id/pause_view"
-	app:layout_constraintHorizontal_bias = "0.466"
+	app:layout_constraintHorizontal_bias = "0.68"
 	app:layout_constraintStart_toStartOf = "@+id/pause_view"
-	app:layout_constraintTop_toTopOf = "@+id/hole1"
-	app:layout_constraintVertical_bias = "0.443"
-	android:visibility="gone"
+	app:layout_constraintTop_toTopOf = "@+id/pause_view"
+	app:layout_constraintVertical_bias = "0.589"
 	/><Button
 	android:id = "@+id/muteBTN"
 	android:layout_width = "wrap_content"
 	android:layout_height = "wrap_content"
+	android:backgroundTint = "@color/green"
 	android:text = "Mute"
+	android:textColor = "@color/black"
+	android:visibility = "invisible"
 	app:layout_constraintBottom_toBottomOf = "@+id/pause_view"
 	app:layout_constraintEnd_toEndOf = "@+id/pause_view"
 	app:layout_constraintStart_toStartOf = "@+id/pause_view"
-	app:layout_constraintTop_toTopOf = "@+id/hole1"
-	app:layout_constraintVertical_bias = "0.255"
-	android:visibility="gone"
+	app:layout_constraintTop_toTopOf = "@+id/pause_view"
+	app:layout_constraintVertical_bias = "0.385"
 	/><Button
 	android:id = "@+id/continueBTN"
 	android:layout_width = "wrap_content"
 	android:layout_height = "wrap_content"
+	android:backgroundTint = "@color/green"
 	android:text = "Continue Game"
+	android:textColor = "@color/black"
+	android:visibility = "invisible"
 	app:layout_constraintBottom_toBottomOf = "@+id/pause_view"
 	app:layout_constraintEnd_toEndOf = "@+id/pause_view"
-	app:layout_constraintHorizontal_bias = "0.509"
+	app:layout_constraintHorizontal_bias = "0.504"
 	app:layout_constraintStart_toStartOf = "@+id/pause_view"
-	app:layout_constraintTop_toTopOf = "@+id/hole1"
-	app:layout_constraintVertical_bias = "0.687"
-	android:visibility="gone"
+	app:layout_constraintTop_toTopOf = "parent"
+	app:layout_constraintVertical_bias = "0.435"
 	/><TextView
 	android:id = "@+id/pauseTXT"
 	android:layout_width = "wrap_content"
 	android:layout_height = "wrap_content"
 	android:text = "Pause Menu"
+	android:textSize = "20dp"
+	android:visibility = "invisible"
 	app:layout_constraintBottom_toBottomOf = "@+id/pause_view"
 	app:layout_constraintEnd_toEndOf = "@+id/pause_view"
+	app:layout_constraintHorizontal_bias = "0.496"
 	app:layout_constraintStart_toStartOf = "@+id/pause_view"
-	app:layout_constraintTop_toTopOf = "@+id/hole1"
-	app:layout_constraintVertical_bias = "0.086"
-	android:textSize="20dp"
-	android:visibility="gone"
+	app:layout_constraintTop_toTopOf = "@+id/timer"
+	app:layout_constraintVertical_bias = "0.315"
 	/>
 	
 

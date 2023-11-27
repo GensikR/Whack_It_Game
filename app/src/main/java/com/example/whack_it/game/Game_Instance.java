@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.whack_it.Img_Src;
+import com.example.whack_it.extras.Stats;
 import com.example.whack_it.mk_mole.Mole;
 
 import java.util.Random;
@@ -29,6 +30,7 @@ public class Game_Instance
     private Runnable mole_animation_runn;
     private Handler handler = new Handler();
     private ObjectAnimator mole_animation;
+    private int flag_mole_type;
 
     /**
      * Constructor for initializing a Game_Instance.
@@ -41,6 +43,7 @@ public class Game_Instance
         this.game_difficulty = difficulty;
         set_game_settings();
         init_stats();
+        this.flag_mole_type = 0;
     }
 
     private void init_stats()
@@ -92,28 +95,67 @@ public class Game_Instance
      */
     public ImageView choose_mole()
     {
+        ImageView image;
         Random random = new Random();
-        int random_idx = random.nextInt(9);
-        int random_idx2 = random.nextInt(9);
-        //Checks if is user made to get either Bitmap or resource ID
-        if(Mole.good_moles.get(random_idx2).get_img_src() == Img_Src.CAMERA)
+        int hole_idx = random.nextInt(6);
+        int mole_idx = random.nextInt(9);
+        int choice = random.nextInt(1);
+        if(flag_mole_type == 1)
         {
-            Game_Activity.mole_viewsId_list.get(random_idx).setImageBitmap(Mole.good_moles.get(random_idx2).get_mole_bitmap());
-            //send Mole so that we can verify if is good or bad
-            Game_Activity.mole_viewsId_list.get(random_idx).setTag(Mole.good_moles.get(random_idx2));
-            return Game_Activity.mole_viewsId_list.get(random_idx);
-        }
-        else if(Mole.good_moles.get(random_idx2).get_img_src() == Img_Src.GALLERY)
-        {
-            Game_Activity.mole_viewsId_list.get(random_idx).setImageURI(Mole.good_moles.get(random_idx2).get_mole_uri());
-            Game_Activity.mole_viewsId_list.get(random_idx).setTag(Mole.good_moles.get(random_idx2));
-            return Game_Activity.mole_viewsId_list.get(random_idx);
+            image = get_good_mole_img(hole_idx, mole_idx);
+            this.flag_mole_type = 0;
         }
         else
         {
-            Game_Activity.mole_viewsId_list.get(random_idx).setImageResource(Mole.good_moles.get(random_idx2).getMole_image_id());
-            Game_Activity.mole_viewsId_list.get(random_idx).setTag(Mole.good_moles.get(random_idx2));
-            return Game_Activity.mole_viewsId_list.get(random_idx);
+            image = get_bad_mole_img(hole_idx, mole_idx);
+            this.flag_mole_type = 1;
+        }
+        return image;
+    }
+
+    private ImageView get_bad_mole_img(int hole_idx, int mole_idx)
+    {
+        if(Mole.bad_moles.get(mole_idx).get_img_src() == Img_Src.CAMERA)
+        {
+            Game_Activity.mole_viewsId_list.get(hole_idx).setImageBitmap(Mole.bad_moles.get(mole_idx).get_mole_bitmap());
+            //send Mole so that we can verify if is good or bad
+            Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.bad_moles.get(mole_idx));
+            return Game_Activity.mole_viewsId_list.get(hole_idx);
+        }
+        else if(Mole.bad_moles.get(mole_idx).get_img_src() == Img_Src.GALLERY)
+        {
+            Game_Activity.mole_viewsId_list.get(hole_idx).setImageURI(Mole.bad_moles.get(mole_idx).get_mole_uri());
+            Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.bad_moles.get(mole_idx));
+            return Game_Activity.mole_viewsId_list.get(hole_idx);
+        }
+        else
+        {
+            Game_Activity.mole_viewsId_list.get(hole_idx).setImageResource(Mole.bad_moles.get(mole_idx).getMole_image_id());
+            Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.bad_moles.get(mole_idx));
+            return Game_Activity.mole_viewsId_list.get(hole_idx);
+        }
+    }
+
+    private ImageView get_good_mole_img(int hole_idx, int mole_idx)
+    {
+        if(Mole.good_moles.get(mole_idx).get_img_src() == Img_Src.CAMERA)
+        {
+            Game_Activity.mole_viewsId_list.get(hole_idx).setImageBitmap(Mole.good_moles.get(mole_idx).get_mole_bitmap());
+            //send Mole so that we can verify if is good or bad
+            Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.good_moles.get(mole_idx));
+            return Game_Activity.mole_viewsId_list.get(hole_idx);
+        }
+        else if(Mole.good_moles.get(mole_idx).get_img_src() == Img_Src.GALLERY)
+        {
+            Game_Activity.mole_viewsId_list.get(hole_idx).setImageURI(Mole.good_moles.get(mole_idx).get_mole_uri());
+            Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.good_moles.get(mole_idx));
+            return Game_Activity.mole_viewsId_list.get(hole_idx);
+        }
+        else
+        {
+            Game_Activity.mole_viewsId_list.get(hole_idx).setImageResource(Mole.good_moles.get(mole_idx).getMole_image_id());
+            Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.good_moles.get(mole_idx));
+            return Game_Activity.mole_viewsId_list.get(hole_idx);
         }
     }
 
@@ -124,10 +166,16 @@ public class Game_Instance
      */
     public void move_mole_up(ImageView mole_image)
     {
-        mole_image.setVisibility(View.VISIBLE);
-        this.mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
-        mole_animation.setDuration(1000);
-        mole_animation.start();
+        Mole this_mole = (Mole)mole_image.getTag();
+        if(this_mole.isIs_hidden())
+        {
+            mole_image.setVisibility(View.VISIBLE);
+            this.mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
+            mole_animation.setDuration(1000);
+            mole_animation.start();
+            this_mole.set_is_hidden(false);
+        }
+        else return;
     }
 
     /**
@@ -136,6 +184,9 @@ public class Game_Instance
     public void stop_game()
     {
         set_is_running(false);
+        Stats.good_taps = this.good_taps;
+        Stats.bad_taps = this.bad_taps;
+        Stats.add_score_to_list(this.total_points);
         this.mole_animation.cancel();
         handler.removeCallbacksAndMessages(this.mole_animation_runn); // Remove all callbacks and messages from the handler
     }
@@ -182,12 +233,33 @@ public class Game_Instance
         return this.game_time;
     }
 
+    public void set_good_taps(int good_taps)
+    {
+        this.good_taps = good_taps;
+    }
+
+    public void set_bad_taps(int bad_taps)
+    {
+        this.bad_taps = bad_taps;
+    }
+
+    public int get_good_taps()
+    {
+        return good_taps;
+    }
+
+    public int get_bad_taps()
+    {
+        return bad_taps;
+    }
+
     public void set_is_running(boolean is_running)
     {
         this.is_running = is_running;
     }
 
-    public void reset_game() {
+    public void reset_game()
+    {
         set_is_running(false);
         total_points = 0;
         handler.removeCallbacksAndMessages(mole_animation_runn); // Remove all callbacks and messages from the handler

@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
+import com.example.whack_it.extras.Stats;
 
 /**
  * Activity displaying game over information and options to play again or return to the main menu.
@@ -19,6 +21,11 @@ public class Game_Over_Activity extends AppCompatActivity
     private Button return_menuBTN;
     private TextView total_pointsTXT;
     private TextView last_pointsTXT;
+    private EditText total_points_txt;
+    private EditText best_score_txt;
+    private int total_points;
+    private int good_taps;
+    private int bad_taps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,11 +33,30 @@ public class Game_Over_Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
+        //Get intent extras that holds stats
+        Intent this_intent = getIntent();
+        this.total_points = this_intent.getIntExtra("total points", 0);
+        this.good_taps = this_intent.getIntExtra("good taps",0);
+        this.bad_taps = this_intent.getIntExtra("bad taps", 0);
+
         //Set the buttons up to return to the main menu or play again
         this.play_againBTN = findViewById(R.id.play_againBTN);
         this.return_menuBTN = findViewById(R.id.main_menuBTN);
         set_play_againBTN(play_againBTN);
         set_return_menuBTN(return_menuBTN);
+
+        set_total_points();
+        set_best_score();
+    }
+
+    private void set_best_score()
+    {
+        this.best_score_txt.setText("" + Stats.best_scores.get(0));
+    }
+
+    private void set_total_points()
+    {
+        this.total_points_txt.setText("" + this.total_points);
     }
 
     /**

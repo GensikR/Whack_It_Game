@@ -20,7 +20,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.whack_it.Img_Src;
+import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
+import com.example.whack_it.game.Game_Over_Activity;
+
 import android.Manifest;
 
 /**
@@ -37,6 +40,7 @@ public class MkMole_Activity extends AppCompatActivity {
     private Button select_imgBTN;
     private View popup_menu_anchor;
     private Button create_moleBTN;
+    private Button return_btn;
     private CheckBox yes_box;
     private CheckBox no_box;
     private EditText name_input;
@@ -51,6 +55,7 @@ public class MkMole_Activity extends AppCompatActivity {
         this.select_imgBTN = findViewById(R.id.chooseAppBTN);
         this.popup_menu_anchor = findViewById(R.id.popupMenuAnchor);
         this.create_moleBTN = findViewById(R.id.createMoleBTN);
+        this.return_btn = findViewById(R.id.mk_return_btn);
 
         // Get image from the user using a popup menu
         set_img_menu();
@@ -65,6 +70,19 @@ public class MkMole_Activity extends AppCompatActivity {
         //TODO change to another View that only allows one choice to be made. radio button I think is called
         this.yes_box = findViewById(R.id.yesCheckBox); // Reference the checkBox by its ID
         this.no_box = findViewById(R.id.noCheckBox); // Reference the checkBox by its ID
+
+        //set return back menu
+        set_retur_BTN();
+    }
+
+    private void set_retur_BTN()
+    {
+        this.return_btn.setOnClickListener( v ->
+        {
+            // Change activities
+            Intent intent = new Intent(MkMole_Activity.this, Main_Activity.class);
+            startActivity(intent);
+        });
     }
 
     /**

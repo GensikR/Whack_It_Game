@@ -1,5 +1,6 @@
 package com.example.whack_it.game;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +16,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whack_it.Main_Activity;
 import com.example.whack_it.Sound;
+import com.example.whack_it.extras.Stats;
 import com.example.whack_it.mk_mole.Mole;
 import com.example.whack_it.R;
 
@@ -190,20 +191,52 @@ public class Game_Activity extends AppCompatActivity
      */
     public void on_mole_click(View view)
     {
-        Mole mole = (Mole)view.getTag();
-        if(mole.is_mole_bad())
+        Mole mole = (Mole) view.getTag();
+        mole.set_is_hidden(true);
+        if (mole.is_mole_bad())
         {
-            game_instance.remove_points(1);
+            game_instance.set_good_taps(1);
+            game_instance.add_points(1);
         }
         else
         {
-            game_instance.add_points(1);
+            game_instance.set_bad_taps(1);
+            game_instance.remove_points(1);
         }
+
         this.total_points_txt.setText("" + game_instance.get_total_points());
+
         ObjectAnimator moveDown = ObjectAnimator.ofFloat(view, "translationY", 5);
         moveDown.setDuration(1000);
+
+        // Set up an AnimatorListener to handle the visibility change after the animation completes
+        moveDown.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                // Animation started
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // Animation ended, set the view to invisible
+                view.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                // Animation canceled
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                // Animation repeated
+            }
+        });
+
+        // Start the animation
         moveDown.start();
     }
+
 
     /*
      Pause Menu UI Elements
@@ -302,11 +335,10 @@ public class Game_Activity extends AppCompatActivity
         int[] moleViewIds =
                 {
                     R.id.mole0, R.id.mole1, R.id.mole2,
-                    R.id.mole3, R.id.mole4, R.id.mole5,
-                    R.id.mole6, R.id.mole7, R.id.mole8
+                    R.id.mole3, R.id.mole4, R.id.mole5
                 };
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < moleViewIds.length; i++)
         {
             ImageView moleView = findViewById(moleViewIds[i]);
             // Set the Mole instance as the tag for the ImageView
@@ -320,7 +352,14 @@ public class Game_Activity extends AppCompatActivity
      */
     public void change_to_game_over_activity()
     {
+        Stats.good_taps = game_instance.get_good_taps();
+        Stats.bad_taps = game_instance.get_bad_taps();
+        Stats.set_accuracy();
+
         Intent intent = new Intent(Game_Activity.this, Game_Over_Activity.class);
+        intent.putExtra("total points", game_instance.get_total_points());
+        intent.putExtra("good taps", game_instance.get_good_taps());
+        intent.putExtra("bad taps", game_instance.get_bad_taps());
         finish();
         startActivity(intent);
     }

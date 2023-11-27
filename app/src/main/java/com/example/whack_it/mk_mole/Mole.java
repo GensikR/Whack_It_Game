@@ -40,6 +40,7 @@ public class Mole {
         this.is_bad = is_bad;
         this.mole_image_id = mole_image_id;
         this.img_src = src;
+        this.is_hidden = true;
     }
     /**
      * Constructor to initialize mole attributes with bitmap image
@@ -106,6 +107,16 @@ public class Mole {
         return mole_uri;
     }
 
+    public void set_is_hidden(boolean is_hidden)
+    {
+        this.is_hidden = is_hidden;
+    }
+
+    public boolean isIs_hidden()
+    {
+        return is_hidden;
+    }
+
     /**
      * Adds a mole to the appropriate list (good or bad).
      *
@@ -153,7 +164,7 @@ public class Mole {
         List<String> good_names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace", "Henry", "Ivy", "Jack");
         for (int i = 0; i < good_names.size(); i++)
         {
-            Mole.add_mole_to_list(new Mole(good_names.get(i), false, R.drawable.mole, Img_Src.DEFAULT));
+            Mole.add_mole_to_list(new Mole(good_names.get(i), false, R.drawable.good_mole, Img_Src.DEFAULT));
         }
     }
 
@@ -166,7 +177,7 @@ public class Mole {
 
         for (int i = 0; i < bad_names.size(); i++)
         {
-            Mole.add_mole_to_list(new Mole(bad_names.get(i), true, R.drawable.mole, Img_Src.DEFAULT));
+            Mole.add_mole_to_list(new Mole(bad_names.get(i), true, R.drawable.bad_mole, Img_Src.DEFAULT));
         }
     }
 }

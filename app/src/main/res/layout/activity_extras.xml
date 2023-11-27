@@ -17,6 +17,8 @@
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
 	app:layout_constraintVertical_bias = "0.401"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/><Button
 	android:id = "@+id/mute_BTN"
 	android:layout_width = "wrap_content"
@@ -28,6 +30,8 @@
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
 	app:layout_constraintVertical_bias = "0.3"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/><Button
 	android:id = "@+id/return_BTN"
 	android:layout_width = "wrap_content"
@@ -39,6 +43,8 @@
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
 	app:layout_constraintVertical_bias = ".7"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/><Button
 	android:id = "@+id/stats_BTN"
 	android:layout_width = "wrap_content"
@@ -50,6 +56,8 @@
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
 	app:layout_constraintVertical_bias = "0.5"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/><Button
 	android:id = "@+id/tutorial_BTN"
 	android:layout_width = "wrap_content"
@@ -61,6 +69,8 @@
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
 	app:layout_constraintVertical_bias = "0.6"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/><View
 	android:id = "@+id/stats_view"
 	android:layout_width = "250dp"
@@ -234,4 +244,6 @@
 	app:layout_constraintTop_toTopOf = "@+id/stats_view"
 	app:layout_constraintVertical_bias = "0.0"
 	android:visibility="gone"
+	android:backgroundTint="@color/green"
+	android:textColor="@color/black"
 	/></androidx.constraintlayout.widget.ConstraintLayout>
