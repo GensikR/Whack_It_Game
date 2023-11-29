@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
-import com.example.whack_it.Sound;
+import com.example.whack_it.utilities.Sound;
 
 /**
  * Activity displaying game extras

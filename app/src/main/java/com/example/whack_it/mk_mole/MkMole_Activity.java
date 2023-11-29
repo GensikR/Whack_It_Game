@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -19,10 +18,9 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.whack_it.Img_Src;
+import com.example.whack_it.utilities.Img_Src;
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
-import com.example.whack_it.game.Game_Over_Activity;
 
 import android.Manifest;
 

@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.whack_it.Img_Src;
+import com.example.whack_it.utilities.Img_Src;
 import com.example.whack_it.extras.Stats;
 import com.example.whack_it.mk_mole.Mole;
 
@@ -31,6 +31,7 @@ public class Game_Instance
     private Handler handler = new Handler();
     private ObjectAnimator mole_animation;
     private int flag_mole_type;
+    private int[] is_hole_filled = new int[10];
 
     /**
      * Constructor for initializing a Game_Instance.
@@ -44,6 +45,10 @@ public class Game_Instance
         set_game_settings();
         init_stats();
         this.flag_mole_type = 0;
+        for(int i = 0; i < 10; i++)
+        {
+            this.is_hole_filled[i] = 0;
+        }
     }
 
     private void init_stats()
@@ -78,7 +83,6 @@ public class Game_Instance
             public void run() {
                 if (is_running) {
                     ImageView chosen_mole = choose_mole();
-
                     move_mole_up(chosen_mole);
                     handler.postDelayed(mole_animation_runn, mole_pop_freq);
                 }
@@ -99,18 +103,25 @@ public class Game_Instance
         ImageView image;
         Random random = new Random();
         int hole_idx = random.nextInt(6);
+
+        this.is_hole_filled[hole_idx] = 1;
         int mole_idx = random.nextInt(9);
         int choice = random.nextInt(1);
+
         if(flag_mole_type == 1)
         {
+            this.is_hole_filled[hole_idx] = 1;
             image = get_good_mole_img(hole_idx, mole_idx);
             this.flag_mole_type = 0;
         }
         else
         {
+            this.is_hole_filled[hole_idx] = 1;
             image = get_bad_mole_img(hole_idx, mole_idx);
             this.flag_mole_type = 1;
         }
+
+
         return image;
     }
 

@@ -1,9 +1,11 @@
 package com.example.whack_it.game;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,12 +13,16 @@ import android.widget.TextView;
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
 import com.example.whack_it.extras.Stats;
+import com.example.whack_it.utilities.Popup_Menu;
+
+import java.util.ArrayList;
 
 /**
  * Activity displaying game over information and options to play again or return to the main menu.
  */
 public class Game_Over_Activity extends AppCompatActivity
 {
+    private View popup_menu_anchor;
     private Button play_againBTN;
     private Button return_menuBTN;
     private TextView total_points_txt;
@@ -38,6 +44,7 @@ public class Game_Over_Activity extends AppCompatActivity
         this.bad_taps = this_intent.getIntExtra("bad taps", 0);
 
         //Set the buttons up to return to the main menu or play again
+        this.popup_menu_anchor = findViewById(R.id.popupMenuAnchor);
         this.play_againBTN = findViewById(R.id.play_againBTN);
         this.return_menuBTN = findViewById(R.id.main_menuBTN);
         this.total_points_txt = findViewById(R.id.total_points_txt);
@@ -69,10 +76,33 @@ public class Game_Over_Activity extends AppCompatActivity
         // Set click listener
         btn.setOnClickListener(v ->
         {
-            // Change activities
-            Intent intent = new Intent(Game_Over_Activity.this, Game_Activity.class);
-            startActivity(intent);
+            // Create a PopupMenu anchored to the specified view
+            PopupMenu popupMenu = new PopupMenu(this, this.popup_menu_anchor);
+            ArrayList<String> options = new ArrayList<>();
+            options.add("Easy");
+            options.add("Medium");
+            options.add("Hard");
+
+            Popup_Menu play_again_pop_menu = new Popup_Menu(popupMenu,options );
+            play_again_pop_menu.show_popup_menu();
+
+            // Set item click listener for the PopupMenu
+            popupMenu.setOnMenuItemClickListener(item ->
+            {
+                // Handle the selected difficulty here
+                String difficulty = item.getTitle().toString();
+                // Changes to game activity and starts the game
+                play_again(difficulty);
+                return true;
+            });
         });
+    }
+
+    private void play_again(String difficulty)
+    {
+        Intent intent = new Intent(Game_Over_Activity.this, Game_Activity.class);
+        intent.putExtra("difficulty", difficulty);  // Puts the difficulty string in the data of the intent to later be retrieved
+        startActivity(intent);
     }
 
     /**

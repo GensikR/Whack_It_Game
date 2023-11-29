@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whack_it.Sound;
+import com.example.whack_it.utilities.Sound;
 import com.example.whack_it.extras.Stats;
 import com.example.whack_it.mk_mole.Mole;
 import com.example.whack_it.R;

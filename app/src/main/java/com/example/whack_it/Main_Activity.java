@@ -10,6 +10,9 @@ import com.example.whack_it.extras.Extras_Activity;
 import com.example.whack_it.extras.Stats;
 import com.example.whack_it.game.Game_Activity;
 import com.example.whack_it.mk_mole.MkMole_Activity;
+import com.example.whack_it.utilities.Popup_Menu;
+
+import java.util.ArrayList;
 
 /**
  * The main activity of the Whack It app.
@@ -27,6 +30,7 @@ public class Main_Activity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Find buttons and anchor view in the layout
         this.playBTN = findViewById(R.id.playBTN);
@@ -78,11 +82,13 @@ public class Main_Activity extends AppCompatActivity
         {
             // Create a PopupMenu anchored to the specified view
             PopupMenu popupMenu = new PopupMenu(this, this.popup_menu_anchor);
+            ArrayList<String> options = new ArrayList<>();
+            options.add("Easy");
+            options.add("Medium");
+            options.add("Hard");
 
-            // Add difficulty options to the PopupMenu
-            popupMenu.getMenu().add("Easy");
-            popupMenu.getMenu().add("Medium");
-            popupMenu.getMenu().add("Hard");
+            Popup_Menu difficulty_pop_menu = new Popup_Menu(popupMenu,options );
+            difficulty_pop_menu.show_popup_menu();
 
             // Set item click listener for the PopupMenu
             popupMenu.setOnMenuItemClickListener(item ->
@@ -93,9 +99,6 @@ public class Main_Activity extends AppCompatActivity
                 startGame(difficulty);
                 return true;
             });
-
-            // Show the PopupMenu
-            popupMenu.show();
         });
     }
 

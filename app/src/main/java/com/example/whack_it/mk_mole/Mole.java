@@ -3,7 +3,7 @@ package com.example.whack_it.mk_mole;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-import com.example.whack_it.Img_Src;
+import com.example.whack_it.utilities.Img_Src;
 import com.example.whack_it.R;
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class Mole {
     private Uri mole_uri;
     private boolean is_hidden = true;
     private Img_Src img_src;
+    private int current_hole_idx;
 
     // Lists to hold good and bad moles
     public static ArrayList<Mole> good_moles = new ArrayList<>();

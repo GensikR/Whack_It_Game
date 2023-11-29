@@ -1,4 +1,4 @@
-package com.example.whack_it;
+package com.example.whack_it.utilities;
 
 public class Sound
 {   //TODO: Implement Audio
