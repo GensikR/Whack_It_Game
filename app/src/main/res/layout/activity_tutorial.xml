@@ -8,20 +8,7 @@
                                                    tools:context = ".game.Game_Activity"
 	>
 
-    <Button
-	    android:id = "@+id/begin_tutorial_btn"
-	    android:layout_width = "368dp"
-	    android:layout_height = "193dp"
-	    android:backgroundTint = "#2B2626"
-	    android:text = "A window will be shown, the game will be pause if you choose to tap the pause button pause. PLEASE TAP THIS BANNER TO CONTINUE."
-	    android:visibility = "gone"
-	    app:layout_constraintBottom_toBottomOf = "@+id/hole4"
-	    app:layout_constraintEnd_toEndOf = "parent"
-	    app:layout_constraintHorizontal_bias = "0.581"
-	    app:layout_constraintStart_toStartOf = "parent"
-	    app:layout_constraintTop_toTopOf = "@+id/timer"
-	    app:layout_constraintVertical_bias = "0.0"
-	    /><androidx.constraintlayout.widget.Guideline
+    <androidx.constraintlayout.widget.Guideline
 	    android:id = "@+id/guideline2"
 	    android:layout_width = "wrap_content"
 	    android:layout_height = "wrap_content"
@@ -363,13 +350,13 @@
 	android:layout_height = "179dp"
 	android:backgroundTint = "#2B2626"
 	android:text = "The remaining time of the game will be shown here. Easy will have 40 seconds, Medium will have 30 seconds, and Hard 20 seconds. The greater the difficulty, the less time you will have to collect points in the game.  TAP THIS BANNER TO CONTINUE."
+	android:visibility = "gone"
 	app:layout_constraintBottom_toBottomOf = "@+id/hole4"
 	app:layout_constraintEnd_toEndOf = "parent"
 	app:layout_constraintHorizontal_bias = "0.495"
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "parent"
 	app:layout_constraintVertical_bias = "0.163"
-	android:visibility="gone"
 	/><Button
 	android:id = "@+id/pause_tutorial_btn"
 	android:layout_width = "368dp"
@@ -432,6 +419,19 @@
 	app:layout_constraintStart_toStartOf = "parent"
 	app:layout_constraintTop_toTopOf = "@+id/timer"
 	app:layout_constraintVertical_bias = "0.568"
+	/><Button
+	android:id = "@+id/begin_tutorial_btn"
+	android:layout_width = "368dp"
+	android:layout_height = "193dp"
+	android:backgroundTint = "#2B2626"
+	android:text = "Welcome to Whack it! Mole Tutorial;.Just Click The banners after you read them to continue the tutorial. . PLEASE TAP THIS BANNER TO CONTINUE."
+	android:visibility = "visible"
+	app:layout_constraintBottom_toBottomOf = "@+id/hole4"
+	app:layout_constraintEnd_toEndOf = "parent"
+	app:layout_constraintHorizontal_bias = "0.488"
+	app:layout_constraintStart_toStartOf = "parent"
+	app:layout_constraintTop_toTopOf = "@+id/timer"
+	app:layout_constraintVertical_bias = "0.426"
 	/>
 	
 

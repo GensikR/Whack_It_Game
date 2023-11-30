@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.whack_it.Main_Activity;
 import com.example.whack_it.game.Difficulty;
 import com.example.whack_it.game.Game_Activity;
 import com.example.whack_it.game.Game_Instance;
@@ -58,7 +59,8 @@ public class Tutorial_Activity extends AppCompatActivity
     private int game_time;
     private int streak_target;
     private int total_points;
-    public static ImageView chosen_mole;
+    private ImageView chosen_mole;
+    private ImageView chosen_mole2;
     private Runnable mole_animation_runn;
     private Handler handler = new Handler();
     private ObjectAnimator mole_animation;
@@ -123,18 +125,22 @@ public class Tutorial_Activity extends AppCompatActivity
         Mole.create_good_moles();
         Mole.create_bad_moles();
 
-        //Set tutorial
-        set_tutorial_btns();
 
         // Starts the tutorial settings and flags
         this.game_difficulty = new Difficulty("tutorial");
         this.flag_mole_type = 0;
         this.current_index = 0;
-        Tutorial_Activity.chosen_mole = findViewById(R.id.mole0);
+        this.chosen_mole = findViewById(R.id.mole1);
+        this.chosen_mole.setImageResource(R.drawable.bad_mole);
+        this.chosen_mole2 = findViewById(R.id.mole4);
+        this.chosen_mole2.setImageResource(R.drawable.good_mole);
         this.mole_pop_freq = this.game_difficulty.getMole_pop_freq();
         this.game_time = this.game_difficulty.getInitial_time();
         this.streak_target = this.game_difficulty.getStreak_to_special_ability();
 
+
+        //Set tutorial
+        set_tutorial_btns();
 
         // Set timer
         timer_text = findViewById(R.id.timer);
@@ -142,6 +148,9 @@ public class Tutorial_Activity extends AppCompatActivity
 
         //set animation
         this.is_this_mole_up = false;
+
+
+        start_tutorial();
 
     }
 
@@ -177,7 +186,7 @@ public class Tutorial_Activity extends AppCompatActivity
 
     private void set_tutorial_btns()
     {
-        this.begin_tutorial_btn = findViewById(R.id.timer_tutorial_btn);
+        this.begin_tutorial_btn = findViewById(R.id.begin_tutorial_btn);
         this.timer_tutorial_btn = findViewById(R.id.timer_tutorial_btn);
         this.points_tutorial_btn = findViewById(R.id.points_tutorial_btn);
         this.mole_tutorial_btn = findViewById(R.id.moles_tutorial_btn);
@@ -185,38 +194,57 @@ public class Tutorial_Activity extends AppCompatActivity
         this.pase_tutorial_btn2 = findViewById(R.id.pause_tutorial_btn2);
         this.end_tutorial_btn = findViewById(R.id.endgame_tutorial_btn);
 
-        //populate_tutorial_steps();
-
         //set on click actions
         this.begin_tutorial_btn.setOnClickListener(v ->
         {
             v.setVisibility(View.GONE);
+            this.timer_tutorial_btn.setVisibility(View.VISIBLE);
         });
         this.timer_tutorial_btn.setOnClickListener(v ->
         {
             v.setVisibility(View.GONE);
-        });
-        this.points_tutorial_btn.setOnClickListener(v ->
-        {
-            v.setVisibility(View.GONE);
+            this.mole_tutorial_btn.setVisibility(View.VISIBLE);
+            move_mole_up(this.chosen_mole);
+            move_mole_up(this.chosen_mole2);
         });
         this.mole_tutorial_btn.setOnClickListener(v ->
         {
             v.setVisibility(View.GONE);
+            move_mole_down(this.chosen_mole);
+            move_mole_down(this.chosen_mole2);
+            this.points_tutorial_btn.setVisibility(View.VISIBLE);
+        });
+        this.points_tutorial_btn.setOnClickListener(v ->
+        {
+            this.chosen_mole.setVisibility(View.GONE);
+            this.chosen_mole2.setVisibility(View.GONE);
+            v.setVisibility(View.GONE);
+            this.pause_tutorial_btn.setVisibility(View.VISIBLE);
+            spawn_pause();
         });
         this.pause_tutorial_btn.setOnClickListener(v ->
         {
             v.setVisibility(View.GONE);
+            this.pase_tutorial_btn2.setVisibility(View.VISIBLE);
         });
         this.pase_tutorial_btn2.setOnClickListener(v ->
         {
+            hide_pause();
             v.setVisibility(View.GONE);
+            this.end_tutorial_btn.setVisibility(View.VISIBLE);
         });
         this.end_tutorial_btn.setOnClickListener(v ->
         {
-            v.setVisibility(View.GONE);
+            return_to_extras_activities();
         });
 
+    }
+
+    private void return_to_extras_activities()
+    {
+        // Change activities
+        Intent intent = new Intent(Tutorial_Activity.this, Extras_Activity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -237,7 +265,7 @@ public class Tutorial_Activity extends AppCompatActivity
             public void run() {
                 if (is_running && !is_this_mole_up) {
                     choose_mole();
-                    move_mole_up(Tutorial_Activity.chosen_mole);
+                    move_mole_up(chosen_mole);
                     handler.postDelayed(mole_animation_runn, mole_pop_freq);
                 }
             }
@@ -250,7 +278,7 @@ public class Tutorial_Activity extends AppCompatActivity
     {
         if(this.flag_mole_type == 0)
         {
-            Tutorial_Activity.chosen_mole.setImageResource(Mole.bad_moles.get(this.current_index).getMole_image_id());
+            this.chosen_mole.setImageResource(Mole.bad_moles.get(this.current_index).getMole_image_id());
             this.flag_mole_type = 1;
             if(this.current_index < 10)
             {
@@ -263,7 +291,7 @@ public class Tutorial_Activity extends AppCompatActivity
         }
         else
         {
-            Tutorial_Activity.chosen_mole.setImageResource(Mole.good_moles.get(current_index).getMole_image_id());
+            this.chosen_mole.setImageResource(Mole.good_moles.get(current_index).getMole_image_id());
             this.flag_mole_type = 0;
             if(this.current_index < 10)
             {
@@ -285,19 +313,10 @@ public class Tutorial_Activity extends AppCompatActivity
     public void move_mole_up(ImageView mole_image)
     {
             mole_image.setVisibility(View.VISIBLE);
+            this.is_this_mole_up = true;
             this.mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
-            mole_animation.setDuration(1000);
-            mole_animation.start();
-            // Delay for 3 seconds and then start the down animation
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if(is_running) {
-                        move_mole_down(mole_image);
-                    }
-                }
-            }, 30000); // 3000 milliseconds (3 seconds)
+            this.mole_animation.setDuration(1000);
+            this.mole_animation.start();
     }
 
     private void move_mole_down(ImageView mole_image)
@@ -386,8 +405,6 @@ public class Tutorial_Activity extends AppCompatActivity
             @Override
             public void onFinish()
             {
-                // Handle actions when the timer finishes (e.g., end the game)
-                stop_game();
             }
         };
 
@@ -395,16 +412,7 @@ public class Tutorial_Activity extends AppCompatActivity
         timer.start();
     }
 
-    private void stop_game()
-    {
-        this.is_running = false;
-        show_end_of_tutorial();
-    }
 
-    private void show_end_of_tutorial()
-    {
-
-    }
 
     /**
      * Updates the timer text based on the remaining time.
@@ -496,19 +504,33 @@ public class Tutorial_Activity extends AppCompatActivity
             {
                 timer.cancel();
             }
-            this.is_running = false;
-            //Make Everything Visible
-            this.pause_view.setVisibility(View.VISIBLE);
-            this.pause_text.setVisibility(View.VISIBLE);
-            this.mute_btn.setVisibility(View.VISIBLE);
-            this.vibration_btn.setVisibility(View.VISIBLE);
-            this.continue_btn.setVisibility(View.VISIBLE);
-            this.exit_btn.setVisibility(View.VISIBLE);
+            spawn_pause();
         });
     }
 
+    private void spawn_pause()
+    {
+        this.is_running = false;
+        //Make Everything Visible
+        this.pause_view.setVisibility(View.VISIBLE);
+        this.pause_text.setVisibility(View.VISIBLE);
+        this.mute_btn.setVisibility(View.VISIBLE);
+        this.vibration_btn.setVisibility(View.VISIBLE);
+        this.continue_btn.setVisibility(View.VISIBLE);
+        this.exit_btn.setVisibility(View.VISIBLE);
+    }
 
-
+    private void hide_pause()
+    {
+        this.is_running = true;
+        //Make Everything Visible
+        this.pause_view.setVisibility(View.GONE);
+        this.pause_text.setVisibility(View.GONE);
+        this.mute_btn.setVisibility(View.GONE);
+        this.vibration_btn.setVisibility(View.GONE);
+        this.continue_btn.setVisibility(View.GONE);
+        this.exit_btn.setVisibility(View.GONE);
+    }
 
 
     // Populates the mole_viewsId_list with mole views from the layout
