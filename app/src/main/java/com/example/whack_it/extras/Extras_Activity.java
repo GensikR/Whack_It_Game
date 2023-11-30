@@ -196,7 +196,7 @@ public class Extras_Activity extends AppCompatActivity
     private void set_tutorial_btn()
     {
         // Set click listener
-        this.return_btn.setOnClickListener(v ->
+        this.tutorial_btn.setOnClickListener(v ->
         {
             // Change activities
             Intent intent = new Intent(Extras_Activity.this, Tutorial_Activity.class);
