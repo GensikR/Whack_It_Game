@@ -31,17 +31,17 @@ public class Extras_Activity extends AppCompatActivity
     private View stats_view;
     private Button close_btn;
     private TextView top_list_txt;
-    private EditText score1;
-    private EditText score2;
-    private EditText score3;
-    private EditText score4;
-    private EditText score5;
+    private TextView score1;
+    private TextView score2;
+    private TextView score3;
+    private TextView score4;
+    private TextView score5;
     private TextView good_taps_txt;
-    private EditText good_taps;
+    private TextView good_taps;
     private TextView bad_taps_txt;
-    private EditText bad_taps;
+    private TextView bad_taps;
     private TextView acc_txt;
-    private  EditText accuracy;
+    private TextView accuracy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

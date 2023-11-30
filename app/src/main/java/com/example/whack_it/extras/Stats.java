@@ -5,9 +5,9 @@ import java.util.Collections;
 
 public class Stats
 {
-    public static int good_taps = 0;
-    public static int bad_taps = 0;
-    public static double accuracy = 0.0;
+    public static int good_taps;
+    public static int bad_taps;
+    public static double accuracy;
     public static ArrayList<Integer> best_scores = new ArrayList<>();
 
     /**
@@ -20,7 +20,7 @@ public class Stats
         Collections.sort(Stats.best_scores, Collections.reverseOrder());
     }
 
-    public static void set_accuracy()
+    public static void update_accuracy()
     {
         if(Stats.bad_taps == 0)
         {
@@ -46,6 +46,20 @@ public class Stats
         {
             Stats.add_score_to_list(0);
         }
+    }
+
+    /**
+     * Update Stats
+     * @param new_score new score to be added to list of scores
+     * @param new_good_taps add this good taps to existing taps
+     * @param new_bad_taps add this bad taps to existing taps
+     */
+    public static void update_stats(int new_score, int new_good_taps, int new_bad_taps)
+    {
+        Stats.add_score_to_list(new_score);
+        Stats.good_taps += new_good_taps;
+        Stats.bad_taps += new_bad_taps;
+        Stats.update_accuracy();
     }
 
 }

@@ -195,12 +195,12 @@ public class Game_Activity extends AppCompatActivity
         mole.set_is_hidden(true);
         if (mole.is_mole_bad())
         {
-            game_instance.set_good_taps(1);
+            game_instance.increase_good_taps_stats();
             game_instance.add_points(1);
         }
         else
         {
-            game_instance.set_bad_taps(1);
+            game_instance.increase_bad_taps_stats();
             game_instance.remove_points(1);
         }
 
@@ -354,7 +354,7 @@ public class Game_Activity extends AppCompatActivity
     {
         Stats.good_taps = game_instance.get_good_taps();
         Stats.bad_taps = game_instance.get_bad_taps();
-        Stats.set_accuracy();
+        Stats.update_accuracy();
 
         Intent intent = new Intent(Game_Activity.this, Game_Over_Activity.class);
         intent.putExtra("total points", game_instance.get_total_points());

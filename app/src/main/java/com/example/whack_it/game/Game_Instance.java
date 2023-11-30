@@ -217,9 +217,7 @@ public class Game_Instance
     public void stop_game()
     {
         set_is_running(false);
-        Stats.good_taps = this.good_taps;
-        Stats.bad_taps = this.bad_taps;
-        Stats.add_score_to_list(this.total_points);
+        Stats.update_stats(get_total_points(), get_good_taps(), get_bad_taps());
         this.mole_animation.cancel();
         handler.removeCallbacksAndMessages(this.mole_animation_runn); // Remove all callbacks and messages from the handler
     }
@@ -266,14 +264,14 @@ public class Game_Instance
         return this.game_time;
     }
 
-    public void set_good_taps(int good_taps)
+    public void increase_good_taps_stats()
     {
-        this.good_taps = good_taps;
+        this.good_taps++;
     }
 
-    public void set_bad_taps(int bad_taps)
+    public void increase_bad_taps_stats()
     {
-        this.bad_taps = bad_taps;
+        this.bad_taps++;
     }
 
     public int get_good_taps()
