@@ -42,6 +42,9 @@ public class Main_Activity extends AppCompatActivity
         setExtrasBTN();
         setMkMoleBTN();
         setPlayBTN();
+
+        //Initialize stats
+        Stats.initialize_stats();
     }
 
     /**

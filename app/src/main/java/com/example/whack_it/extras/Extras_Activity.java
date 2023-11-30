@@ -84,7 +84,6 @@ public class Extras_Activity extends AppCompatActivity
         this.acc_txt = findViewById(R.id.acc_txt);
         this.accuracy = findViewById(R.id.accuracy);
 
-       //TODO: set_all_stats_txt(); to whenever we get stats implemented to the game activity
 
     }
 
@@ -98,18 +97,19 @@ public class Extras_Activity extends AppCompatActivity
 
     private void set_all_stats_txt()
     {
-        this.score1.setText(Stats.best_scores.get(0));
-        this.score2.setText(Stats.best_scores.get(1));
-        this.score3.setText(Stats.best_scores.get(2));
-        this.score4.setText(Stats.best_scores.get(3));
-        this.score5.setText(Stats.best_scores.get(4));
-        this.good_taps.setText(Stats.good_taps);
-        this.bad_taps.setText(Stats.bad_taps);
-        this.accuracy.setText(Stats.good_taps / Stats.bad_taps);
+        this.score1.setText("" + Stats.best_scores.get(0));
+        this.score2.setText("" + Stats.best_scores.get(1));
+        this.score3.setText("" + Stats.best_scores.get(2));
+        this.score4.setText("" + Stats.best_scores.get(3));
+        this.score5.setText("" + Stats.best_scores.get(4));
+        this.good_taps.setText("" + Stats.good_taps);
+        this.bad_taps.setText("" + Stats.bad_taps);
+        this.accuracy.setText("" + Stats.get_accuracy());
     }
 
     private void spawn_stats_view()
     {
+        set_all_stats_txt();
         this.stats_view.setVisibility(View.VISIBLE);
         this.close_btn.setVisibility(View.VISIBLE);
         this.top_list_txt.setVisibility(View.VISIBLE);

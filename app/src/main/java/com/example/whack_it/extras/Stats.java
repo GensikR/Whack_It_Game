@@ -22,7 +22,30 @@ public class Stats
 
     public static void set_accuracy()
     {
-        Stats.accuracy = Stats.good_taps / Stats.bad_taps;
+        if(Stats.bad_taps == 0)
+        {
+            Stats.accuracy = Stats.good_taps;
+        }
+        else
+        {
+            Stats.accuracy = Stats.good_taps / Stats.bad_taps;
+        }
+    }
+
+    public static double get_accuracy()
+    {
+        return Stats.accuracy;
+    }
+
+    public static void initialize_stats()
+    {
+        Stats.good_taps = 0;
+        Stats.bad_taps = 0;
+        Stats.accuracy = 0.0;
+        for(int i = 0; i < 10; i++)
+        {
+            Stats.add_score_to_list(0);
+        }
     }
 
 }
