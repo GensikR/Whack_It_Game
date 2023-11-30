@@ -5,9 +5,9 @@ import java.util.Collections;
 
 public class Stats
 {
-    public static int good_taps;
-    public static int bad_taps;
-    public static double accuracy;
+    public static int good_taps = 0;
+    public static int bad_taps = 0;
+    public static double accuracy = 0.0;
     public static ArrayList<Integer> best_scores = new ArrayList<>();
 
     /**
@@ -39,9 +39,9 @@ public class Stats
 
     public static void initialize_stats()
     {
-        Stats.good_taps = 0;
-        Stats.bad_taps = 0;
-        Stats.accuracy = 0.0;
+        //Stats.good_taps = 0;
+        //Stats.bad_taps = 0;
+        //Stats.accuracy = 0.0;
         for(int i = 0; i < 10; i++)
         {
             Stats.add_score_to_list(0);

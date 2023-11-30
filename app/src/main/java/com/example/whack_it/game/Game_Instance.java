@@ -276,12 +276,12 @@ public class Game_Instance
 
     public int get_good_taps()
     {
-        return good_taps;
+        return this.good_taps;
     }
 
     public int get_bad_taps()
     {
-        return bad_taps;
+        return this.bad_taps;
     }
 
     public void set_is_running(boolean is_running)
