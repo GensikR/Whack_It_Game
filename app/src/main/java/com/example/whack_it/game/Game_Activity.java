@@ -193,7 +193,6 @@ public class Game_Activity extends AppCompatActivity
     {
         Mole mole = (Mole) view.getTag();
         mole.set_is_hidden(true);
-        this.game_instance.decrease_used_holes();
         if (mole.is_mole_bad())
         {
             game_instance.increase_good_taps_stats();
@@ -220,7 +219,9 @@ public class Game_Activity extends AppCompatActivity
             @Override
             public void onAnimationEnd(Animator animation) {
                 // Animation ended, set the view to invisible
-                view.setVisibility(View.GONE);
+                view.setVisibility(View.INVISIBLE);
+                int hole_idx = mole.get_current_hole_idx();
+                game_instance.set_hole_filled(hole_idx, false);
             }
 
             @Override

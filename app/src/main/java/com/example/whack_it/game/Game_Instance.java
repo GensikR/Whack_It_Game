@@ -1,9 +1,7 @@
 package com.example.whack_it.game;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,6 +18,7 @@ public class Game_Instance
 {
 
     // Game state variables
+    private final int NUM_HOLES = 6;
     private Difficulty game_difficulty;
     private boolean is_running;
     private int mole_pop_freq;
@@ -31,13 +30,9 @@ public class Game_Instance
 
     private Runnable mole_animation_runn;
     private Handler handler = new Handler();
-    private ObjectAnimator mole_up_animation;
-    private ObjectAnimator mole_down_animation;
-    private boolean is_current_mole_bad;
-    private final int NUM_HOLES = 6;
+    private ObjectAnimator mole_animation;
+    private int flag_mole_type;
     private boolean[] is_hole_filled = new boolean[NUM_HOLES];
-    private int used_holes;
-    private boolean are_all_holes_filled;
 
     /**
      * Constructor for initializing a Game_Instance.
@@ -50,9 +45,7 @@ public class Game_Instance
         this.game_difficulty = difficulty;
         set_game_settings();
         init_stats();
-        this.is_current_mole_bad = true;
-        this.used_holes = 0;
-        this.are_all_holes_filled = false;
+        this.flag_mole_type = 0;
         for(int i = 0; i < NUM_HOLES; i++)
         {
             this.is_hole_filled[i] = false;
@@ -91,71 +84,19 @@ public class Game_Instance
             public void run() {
                 if (is_running) {
                     ImageView chosen_mole = choose_mole();
-                    move_mole_up(chosen_mole);
-
-                    if (should_run_animation()) {
-                        // Recursive call to restart the animation
-                        handler.postDelayed(mole_animation_runn, mole_pop_freq);
-                    } else {
-                        // Log a message to help identify why the animation is not restarting
-                        Log.d("Animation", "Animation not restarted. is_running: " + is_running + ", should_run_animation(): " + should_run_animation());
+                    Mole mole = (Mole) chosen_mole.getTag();
+                    if(!is_hole_filled(mole.get_current_hole_idx()))
+                    {
+                        chosen_mole.setVisibility(View.VISIBLE);
                     }
+                    move_mole_up(chosen_mole);
+                    handler.postDelayed(mole_animation_runn, mole_pop_freq);
                 }
             }
         };
 
         handler.postDelayed(mole_animation_runn, mole_pop_freq);
     }
-
-
-    private void move_mole_down(ImageView mole_image)
-    {
-        Mole this_mole = (Mole)mole_image.getTag();
-        this_mole.set_is_hidden(true);
-        mole_image.setVisibility(View.GONE);
-        decrease_used_holes();
-        this.mole_down_animation = ObjectAnimator.ofFloat(mole_image, "translationY", 0);
-        mole_down_animation.setDuration(1000);
-        mole_down_animation.start();
-        mole_down_animation.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                // Animation started
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                // Animation ended, set the view to invisible
-                mole_image.setVisibility(View.GONE);
-                this_mole.set_is_hidden(true);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-                // Animation canceled
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                // Animation repeated
-            }
-        });
-
-    }
-
-    private boolean should_run_animation()
-    {
-        Log.d("Used Holes Update: ", "Used Holes: " + this.used_holes);
-        if (this.used_holes <  (NUM_HOLES - 2))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
 
 
     /**
@@ -167,67 +108,30 @@ public class Game_Instance
     {
         ImageView image;
         Random random = new Random();
-        int hole_idx = get_random_hole_idx();
+        int hole_idx = random.nextInt(6);
 
-        int mole_idx = get_random_mole_idx();
+        int mole_idx = random.nextInt(9);
 
-        if(this.is_current_mole_bad)
+        if(flag_mole_type == 1)
         {
             image = get_good_mole_img(hole_idx, mole_idx);
-            this.is_current_mole_bad = false;
+            this.flag_mole_type = 0;
         }
         else
         {
             image = get_bad_mole_img(hole_idx, mole_idx);
-            this.is_current_mole_bad = true;
+            this.flag_mole_type = 1;
         }
 
 
         return image;
     }
 
-    private int get_random_hole_idx()
-    {
-        Random random = new Random();
-        int hole_idx;
-        do
-        {
-            hole_idx = random.nextInt(NUM_HOLES);
-            if(this.are_all_holes_filled)
-            {
-                wait_for_empty_hole();
-            }
-        }
-            while(this.is_hole_filled[hole_idx]);
-
-            this.is_hole_filled[hole_idx] = true;
-            this.used_holes++;
-            if(used_holes >= NUM_HOLES)
-            {
-                this.are_all_holes_filled = true;
-            }
-        return hole_idx;
-    }
-
-    private int get_random_mole_idx()
-    {
-        Random random = new Random();
-        int mole_idx = 0;
-        if(this.is_current_mole_bad)
-        {
-            mole_idx = random.nextInt(Mole.good_moles.size());
-        }
-        else
-        {
-            mole_idx = random.nextInt(Mole.bad_moles.size());
-        }
-        return mole_idx;
-    }
-
     private ImageView get_bad_mole_img(int hole_idx, int mole_idx)
     {
         if(Mole.bad_moles.get(mole_idx).get_img_src() == Img_Src.CAMERA)
         {
+            Mole.bad_moles.get(mole_idx).set_current_hole_idx(hole_idx);
             Game_Activity.mole_viewsId_list.get(hole_idx).setImageBitmap(Mole.bad_moles.get(mole_idx).get_mole_bitmap());
             //send Mole so that we can verify if is good or bad
             Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.bad_moles.get(mole_idx));
@@ -235,12 +139,14 @@ public class Game_Instance
         }
         else if(Mole.bad_moles.get(mole_idx).get_img_src() == Img_Src.GALLERY)
         {
+            Mole.bad_moles.get(mole_idx).set_current_hole_idx(hole_idx);
             Game_Activity.mole_viewsId_list.get(hole_idx).setImageURI(Mole.bad_moles.get(mole_idx).get_mole_uri());
             Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.bad_moles.get(mole_idx));
             return Game_Activity.mole_viewsId_list.get(hole_idx);
         }
         else
         {
+            Mole.bad_moles.get(mole_idx).set_current_hole_idx(hole_idx);
             Game_Activity.mole_viewsId_list.get(hole_idx).setImageResource(Mole.bad_moles.get(mole_idx).getMole_image_id());
             Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.bad_moles.get(mole_idx));
             return Game_Activity.mole_viewsId_list.get(hole_idx);
@@ -251,6 +157,7 @@ public class Game_Instance
     {
         if(Mole.good_moles.get(mole_idx).get_img_src() == Img_Src.CAMERA)
         {
+            Mole.good_moles.get(mole_idx).set_current_hole_idx(hole_idx);
             Game_Activity.mole_viewsId_list.get(hole_idx).setImageBitmap(Mole.good_moles.get(mole_idx).get_mole_bitmap());
             //send Mole so that we can verify if is good or bad
             Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.good_moles.get(mole_idx));
@@ -258,12 +165,14 @@ public class Game_Instance
         }
         else if(Mole.good_moles.get(mole_idx).get_img_src() == Img_Src.GALLERY)
         {
+            Mole.good_moles.get(mole_idx).set_current_hole_idx(hole_idx);
             Game_Activity.mole_viewsId_list.get(hole_idx).setImageURI(Mole.good_moles.get(mole_idx).get_mole_uri());
             Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.good_moles.get(mole_idx));
             return Game_Activity.mole_viewsId_list.get(hole_idx);
         }
         else
         {
+            Mole.good_moles.get(mole_idx).set_current_hole_idx(hole_idx);
             Game_Activity.mole_viewsId_list.get(hole_idx).setImageResource(Mole.good_moles.get(mole_idx).getMole_image_id());
             Game_Activity.mole_viewsId_list.get(hole_idx).setTag(Mole.good_moles.get(mole_idx));
             return Game_Activity.mole_viewsId_list.get(hole_idx);
@@ -280,19 +189,18 @@ public class Game_Instance
         Mole this_mole = (Mole)mole_image.getTag();
         if(this_mole.isIs_hidden())
         {
+            this.is_hole_filled[this_mole.get_current_hole_idx()] = true;
             this_mole.set_is_hidden(false);
-            mole_image.setVisibility(View.VISIBLE);
-            this.mole_up_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
-            mole_up_animation.setDuration(1000);
-            mole_up_animation.start();
+            this.mole_animation = ObjectAnimator.ofFloat(mole_image, "translationY", -100);
+            mole_animation.setDuration(1000);
+            mole_animation.start();
             // Delay for 3 seconds and then start the down animation
 
-           /* new Handler().postDelayed(new Runnable()
-            {
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if(is_running) {
-                        decrease_used_holes();
+                        is_hole_filled[this_mole.get_current_hole_idx()] = false;
                         ObjectAnimator moveDown = ObjectAnimator.ofFloat(mole_image, "translationY", 0);
                         moveDown.setDuration(1000);
                         moveDown.start();
@@ -300,11 +208,11 @@ public class Game_Instance
                 }
             }, 3000); // 3000 milliseconds (3 seconds)
 
-*/
+
         }
         else if (!this_mole.isIs_hidden())
         {
-            decrease_used_holes();
+            this.is_hole_filled[this_mole.get_current_hole_idx()] = false;
             ObjectAnimator moveDown = ObjectAnimator.ofFloat(mole_image, "translationY", 0);
             moveDown.setDuration(100);
             moveDown.start();
@@ -313,20 +221,6 @@ public class Game_Instance
         }
     }
 
-    private void wait_for_empty_hole() {
-        // Check if all holes are filled
-        if (are_all_holes_filled) {
-            // Wait for a hole to be empty using a Handler
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    wait_for_empty_hole(); // Check again after a delay
-                }
-            }, 100); // Adjust the delay as needed
-        }
-    }
-
-
     /**
      * Stops the game.
      */
@@ -334,7 +228,7 @@ public class Game_Instance
     {
         set_is_running(false);
         Stats.update_stats(get_total_points(), get_good_taps(), get_bad_taps());
-        this.mole_up_animation.cancel();
+        this.mole_animation.cancel();
         handler.removeCallbacksAndMessages(this.mole_animation_runn); // Remove all callbacks and messages from the handler
     }
 
@@ -348,16 +242,6 @@ public class Game_Instance
     public void add_points(int points)
     {
         this.total_points += points;
-    }
-
-    public void increase_used_holes()
-    {
-        this.used_holes ++;
-    }
-
-    public void decrease_used_holes()
-    {
-        this.used_holes --;
     }
 
     /**
@@ -421,6 +305,15 @@ public class Game_Instance
         total_points = 0;
         handler.removeCallbacksAndMessages(mole_animation_runn); // Remove all callbacks and messages from the handler
         // Reset any other game state variables as needed
+    }
+
+    public void set_hole_filled(int hole_idx, boolean is_filled)
+    {
+        this.is_hole_filled[hole_idx] = is_filled;
+    }
+    public boolean is_hole_filled(int hole_idx)
+    {
+        return this.is_hole_filled[hole_idx];
     }
 
 }

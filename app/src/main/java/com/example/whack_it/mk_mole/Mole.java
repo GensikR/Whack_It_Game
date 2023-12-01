@@ -42,6 +42,7 @@ public class Mole {
         this.mole_image_id = mole_image_id;
         this.img_src = src;
         this.is_hidden = true;
+        this.current_hole_idx = -1;
     }
     /**
      * Constructor to initialize mole attributes with bitmap image
@@ -56,6 +57,7 @@ public class Mole {
         this.is_bad = is_bad;
         this.mole_bitmap = mole_bitmap;
         this.img_src = src;
+        this.current_hole_idx = -1;
     }
 
     /**
@@ -71,6 +73,7 @@ public class Mole {
         this.is_bad = is_bad;
         this.mole_uri = mole_uri;
         this.img_src = src;
+        this.current_hole_idx = -1;
     }
 
     /**
@@ -180,5 +183,15 @@ public class Mole {
         {
             Mole.add_mole_to_list(new Mole(bad_names.get(i), true, R.drawable.bad_mole, Img_Src.DEFAULT));
         }
+    }
+
+    public void set_current_hole_idx(int current_hole_idx)
+    {
+        this.current_hole_idx = current_hole_idx;
+    }
+
+    public int get_current_hole_idx()
+    {
+        return current_hole_idx;
     }
 }
