@@ -18,6 +18,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.whack_it.game.Game_Activity;
 import com.example.whack_it.utilities.Img_Src;
 import com.example.whack_it.Main_Activity;
 import com.example.whack_it.R;
@@ -157,11 +158,17 @@ public class MkMole_Activity extends AppCompatActivity {
                 start_camera();
                 break;
             case ("Choose From Stock"):
-                //TODO let the user choose image from stock
+                choose_from_stock();
                 break;
             default:
                 break;
         }
+    }
+
+    private void choose_from_stock()
+    {
+        Intent intent = new Intent(MkMole_Activity.this, Choose_Gallery.class);
+        startActivity(intent);
     }
 
     private void gallery()

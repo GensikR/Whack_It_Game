@@ -55,6 +55,11 @@
             android:name=".extras.Tutorial_Activity"
             android:label="Tutorial Activity">
         </activity>
+        <activity
+            android:name=".mk_mole.Choose_Gallery"
+            android:label="Choose Gallery Activity"
+            >
+            </activity>
         </application>
 
 </manifest>
